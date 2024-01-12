@@ -10,12 +10,13 @@ public class DbConnection {
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
     private static final String pass = "";
-    private static final String db = "USUARIOS";
+    private static final String db = "";
     private static final String url = "jdbc:mysql://localhost/"+db+"";
 
 
     /**
-     * Método constructor (vacío) de la clase conexion, es el que hace la conexión con la bbdd
+     * Método constructor (vacío) de la clase conexion, es el que hace la conexión con la bbdd.
+     * En el caso de que la base de datos no exista la crea y crea también las tablas
      */
 
     public DbConnection() {
@@ -59,7 +60,8 @@ public class DbConnection {
             s.executeUpdate("CREATE TABLE IF NOT EXISTS Usuario (idUsuario BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idUsuario), nombreUsuario VARCHAR(80), passUsuario VARCHAR(80), idPersona BIGINT(20), FOREIGN KEY( idPersona) REFERENCES Persona(idPersona), idTipoUsuario BIGINT(20), FOREIGN KEY(idTipoUsuario) REFERENCES TipoUsuario(idTipoUsuario)");
             System.out.println("La tabla \"USUARIO\" ha sido creada correctamente");
         } catch (SQLException ex) {
-            System.out.println("Las tablas ya se encontraban creadas");
+            System.out.println("Las tablas ya se encontraban creadas " + ex);
+
         }
 
     }

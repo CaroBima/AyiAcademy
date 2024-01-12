@@ -1,3 +1,6 @@
+import model.TipoUsuario;
+import repository.DbConnection;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,9 +9,11 @@ import java.io.InputStreamReader;
 public class Principal {
     public static void main(String[] args) throws IOException {
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
-
+        DbConnection  dbconection = new DbConnection();
+        dbconection.crearTablas();
         String input;
 
+        /*  --------------------- Comienzo del menú -------------------------- */
         System.out.println("Ingrese el número de opción: ");
         System.out.println("1 - Cargar un Usuario");
         System.out.println("2 - Cargar un Tipo de usuario");
@@ -35,6 +40,20 @@ public class Principal {
             input = entrada.readLine();
         };
 
+        /*  --------------------- Fin del menú -------------------------- */
+
+        int opcionSeleccionada = Integer.parseInt(input);
+
+        switch(opcionSeleccionada){
+            case 1:
+                System.out.println("Aún en desarrollo");
+                break;
+            case 2: //carga un nuevo tipo de usuario, ingresado por teclado
+                TipoUsuario nuevoTipoUsuario = cargarTipoUsuario();
+                dbconection.registrarTipoUsuario(nuevoTipoUsuario);
+                break;
+
+        }
     }
 
     /**
@@ -56,4 +75,15 @@ public class Principal {
         return resultado;
     }
 
+    private static TipoUsuario cargarTipoUsuario() throws IOException {
+        TipoUsuario tipoUsuario = new TipoUsuario();
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.print("Ingrese la descripción del tipo de usuario: ");
+        String descripcion = entrada.readLine();
+
+        tipoUsuario.setDescripcion(descripcion);
+
+        return tipoUsuario;
+    }
 }
