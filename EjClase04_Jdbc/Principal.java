@@ -1,5 +1,6 @@
 import model.TipoUsuario;
 import repository.DbConnection;
+import repository.TipoUsuarioRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +27,8 @@ public class Principal {
                     break;
                 case 2: //carga un nuevo tipo de usuario, ingresado por teclado
                     TipoUsuario nuevoTipoUsuario = cargarTipoUsuario();
-                    dbconection.registrarTipoUsuario(nuevoTipoUsuario);
+                    TipoUsuarioRepository tipoUsuRepo = new TipoUsuarioRepository();
+                    tipoUsuRepo.registrarTipoUsuario(nuevoTipoUsuario);
                     break;
                 case 3:
                     System.out.println("Aún en desarrollo");

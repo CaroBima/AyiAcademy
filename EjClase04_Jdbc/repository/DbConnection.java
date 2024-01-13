@@ -12,7 +12,7 @@ public class DbConnection {
     private static final String pass = "";
     private static String db = "";
     private static final String url = "jdbc:mysql://localhost:3306/"+db+"";
-
+    private static final String urlCompleta = "jdbc:mysql://localhost:3306/usuarios";
 
     /**
      * Método constructor (vacío) de la clase conexion, es el que hace la conexión con la bbdd.
@@ -23,20 +23,20 @@ public class DbConnection {
             Statement s;
             Class.forName(driver);
 
+            //si la base de datos no existe la crea
             conexion = (Connection) DriverManager.getConnection(url,user,pass);
             s = conexion.createStatement();
 
-            int estaPreviamenteCreada = s.executeUpdate("CREATE DATABASE IF NOT EXISTS USUARIOS");
+            s.executeUpdate("CREATE DATABASE IF NOT EXISTS USUARIOS");
+            s.close();
 
-            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios",user,pass);
+            //se conecta a la base de datos
+            conexion = (Connection) DriverManager.getConnection(urlCompleta,user,pass);
             s = conexion.createStatement();
             crearTablas();
             s.close();
 
-
-
-
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", user, pass);
+            //conexion = DriverManager.getConnection(urlCompleta, user, pass);
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -46,6 +46,9 @@ public class DbConnection {
         }
     }
 
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(urlCompleta, user, pass);
+    }
     /**
      * Método que crea las tablas de la base de datos en caso de que no existan
      */
@@ -98,32 +101,7 @@ public class DbConnection {
         }
     }
 
-    /**
-     * Permite registrar un nuevo tipo de usuario en la base de datos.
-     * Primero verifica si el tipo de usuario ya se encuentra almacenado, si no está registrado lo guarda, si ya se encuentra registrado
-     * Una vez que lo guarda informa que se hizo el cambio, si no se puede guardar lo informa también.
-     * @param tipoUsuario
-     */
-    public void registrarTipoUsuario(TipoUsuario tipoUsuario) {
-        Statement stmt;
-        String agregarTipoUsuario;
-        Boolean estaRegistrado = buscarTipoUsuario(tipoUsuario.getDescripcion());
 
-        if(!estaRegistrado){
-            agregarTipoUsuario = "INSERT INTO TipoUsuario (descripcion) VALUES('" + tipoUsuario.getDescripcion() +"')";
-
-            try {
-                stmt = conexion.createStatement();
-                String st_inserta = agregarTipoUsuario;
-                stmt.executeUpdate(st_inserta);
-                System.out.println("El tipo de usuario " + tipoUsuario.getDescripcion() + " se cargo correctamente");
-            } catch (SQLException ex) {
-                System.out.println("El tipo de usuario " +  tipoUsuario.getDescripcion()  + " no han podido ser guardado");
-            }
-        }else{
-            System.out.println("El tipo de usuario " +  tipoUsuario.getDescripcion()  + " ya se encontraba previamente registrado en la base de datos");
-        }
-    }
 
     /**
      * Verifica si el documento que recibe por parámetros ya está en la base de datos. Devuelve true en caso de que este y false si no está.
@@ -154,35 +132,7 @@ public class DbConnection {
         return documentoEsta;
     }
 
-    /**
-     * Permite buscar un determinado tipo de usuario para ver si se encuentra ya guardado en la base de datos
-     * realiza la busqueda por el tipo de usuario
-     * @param tipoUsuario
-     * @return
-     */
-    public boolean buscarTipoUsuario(String tipoUsuario){
-        Statement stmt;
-        String buscarTipoUsuario;
-        ResultSet result = null;
-        boolean tipoUsuarioEsta = false;
 
-        buscarTipoUsuario = "SELECT * FROM Documento WHERE descripción = '" + tipoUsuario;
-
-        try {
-            stmt = conexion.createStatement();
-            result = stmt.executeQuery(buscarTipoUsuario);
-
-            if (result.next()){
-                tipoUsuarioEsta = true;
-            }
-            else{
-                tipoUsuarioEsta = false;
-            }
-        } catch (SQLException ex) {
-            System.out.println("No se puedo establecer conexión con la base de datos");
-        }
-        return tipoUsuarioEsta;
-    }
 
     /**
      * Lista por consola los tipos de usuarios que se encuentran registrados en la base de datos
