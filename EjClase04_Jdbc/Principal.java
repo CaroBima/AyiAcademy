@@ -10,25 +10,40 @@ public class Principal {
     public static void main(String[] args) throws IOException {
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
         DbConnection  dbconection = new DbConnection();
+        int opcionSeleccionada = 999;
 
-        String input = mostrarMenu(entrada);
+        do {
+            String input = mostrarMenu(entrada);
 
-        int opcionSeleccionada = Integer.parseInt(input);
+            opcionSeleccionada = Integer.parseInt(input);
 
-        switch(opcionSeleccionada){
-            case 1:
-                System.out.println("Aún en desarrollo");
-                mostrarMenu(entrada);
-                break;
-            case 2: //carga un nuevo tipo de usuario, ingresado por teclado
-                TipoUsuario nuevoTipoUsuario = cargarTipoUsuario();
-                dbconection.registrarTipoUsuario(nuevoTipoUsuario);
-                mostrarMenu(entrada);
-                break;
-            case 3:
-                dbconection.listarTipoUsuario();
+            switch (opcionSeleccionada) {
+                case 0:
+                    System.out.println("Chau!");
+                    break;
+                case 1:
+                    System.out.println("Aún en desarrollo");
+                    break;
+                case 2: //carga un nuevo tipo de usuario, ingresado por teclado
+                    TipoUsuario nuevoTipoUsuario = cargarTipoUsuario();
+                    dbconection.registrarTipoUsuario(nuevoTipoUsuario);
+                    break;
+                case 3:
+                    System.out.println("Aún en desarrollo");
 
-        }
+                    break;
+                case 4:
+                    System.out.println("Aún en desarrollo");
+                    break;
+                case 5:
+                    System.out.println("********************************************");
+                    System.out.println("       Listado de usuarios registrados:     ");
+                    System.out.println("********************************************");
+                    dbconection.listarTipoUsuario();
+                    break;
+            }
+
+        }while(opcionSeleccionada != 0);
     }
 
     /**
@@ -40,40 +55,43 @@ public class Principal {
      */
     private static String mostrarMenu(BufferedReader entrada) throws IOException {
         String input;
-
-        System.out.println("Ingrese el número de opción: ");
-        System.out.println("1 - Cargar un Usuario");
-        System.out.println("2 - Cargar un Tipo de usuario");
-        System.out.println("3 - Cargar un Tipo de documento");
-        System.out.println("4 - Consultar por nombre de usuario");
-        System.out.println("4 - Consultar listado de usuarios registrados");
-        System.out.println("5 - Salir");
+        System.out.println(" ");
+        System.out.println("********************************************");
+        System.out.println("              Menú de opciones              ");
+        System.out.println("********************************************");
+        System.out.println("  1 - Cargar un Usuario");
+        System.out.println("  2 - Cargar un Tipo de usuario");
+        System.out.println("  3 - Cargar un Tipo de documento");
+        System.out.println("  4 - Consultar por nombre de usuario");
+        System.out.println("  5 - Listar tipos de usuarios registrados");
+        System.out.println("  0 - Salir");
         System.out.print(  "Ingrese el número de opción: ");
         input = entrada.readLine();
         System.out.println(input);
 
         //Valído si no es número, si no es, pide que ingrese nuevamente el valor hasta que lo sea
         while(!esNumero(input)){
-            System.out.println("El valor ingresado debe ser un valor numérico entre 1 y 5.");
+            System.out.println("El valor ingresado debe ser un valor numérico entre 0 y 5.");
             System.out.print("Ingrese nuevamente la opción: ");
             input = entrada.readLine();
         };
 
-        //Valido que el valor numérico ingresado esté entre 1 y 5, si no está entre esos valores solicita que
+        //Valido que el valor numérico ingresado esté entre los posibles, si no está entre esos valores solicita que
         // se ingrese nuevamente hasta que cumpla la condición
-        while(esNumero(input) && (Integer.parseInt(input)<1 || Integer.parseInt(input)>5)){
-            System.out.println("El número ingresado debe estar entre 1 y 5.");
+        while(esNumero(input) && (Integer.parseInt(input)<0 || Integer.parseInt(input)>5)){
+            System.out.println("El número ingresado debe estar entre 0 y 5.");
             System.out.print("Ingrese nuevamente la opción: ");
             input = entrada.readLine();
         };
 
         return input;
     }
+
     /**
      * Metódo que verifica si el valor que recibe por parámentro es un número o no.
      * Devuelve true en caso de que lo sea y false si no es número.
      * @param input
-     * @return
+     * @return boolean
      */
     private static boolean esNumero(String input){
         boolean resultado;
@@ -88,6 +106,11 @@ public class Principal {
         return resultado;
     }
 
+    /**
+     * Permite realizar la carga de un nuevo tipo de usuario en la base de datos
+     * @return tipoUsuario, el nuevo tipo de usuario que será guardado en la base de datos
+     * @throws IOException
+     */
     private static TipoUsuario cargarTipoUsuario() throws IOException {
         TipoUsuario tipoUsuario = new TipoUsuario();
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));

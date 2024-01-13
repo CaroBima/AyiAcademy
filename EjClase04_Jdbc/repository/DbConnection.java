@@ -10,7 +10,7 @@ public class DbConnection {
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
     private static final String pass = "";
-    private static final String db = "usuarios";
+    private static String db = "";
     private static final String url = "jdbc:mysql://localhost:3306/"+db+"";
 
 
@@ -26,10 +26,17 @@ public class DbConnection {
             conexion = (Connection) DriverManager.getConnection(url,user,pass);
             s = conexion.createStatement();
 
-            s.executeUpdate("CREATE DATABASE IF NOT EXISTS USUARIOS");
+            int estaPreviamenteCreada = s.executeUpdate("CREATE DATABASE IF NOT EXISTS USUARIOS");
+
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios",user,pass);
+            s = conexion.createStatement();
             crearTablas();
             s.close();
-            conexion = DriverManager.getConnection(url, user, pass);
+
+
+
+
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", user, pass);
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
