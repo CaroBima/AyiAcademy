@@ -10,24 +10,24 @@ public class DbConnection {
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
     private static final String pass = "";
-    private static final String db = "";
-    private static final String url = "jdbc:mysql://localhost/"+db+"";
+    private static final String db = "usuarios";
+    private static final String url = "jdbc:mysql://localhost:3306/"+db+"";
 
 
     /**
      * Método constructor (vacío) de la clase conexion, es el que hace la conexión con la bbdd.
      * En el caso de que la base de datos no exista la crea y crea también las tablas
      */
-
     public DbConnection() {
         try {
             Statement s;
-            Class.forName(driver); //carga el controlador de la bbdd
+            Class.forName(driver);
 
             conexion = (Connection) DriverManager.getConnection(url,user,pass);
             s = conexion.createStatement();
 
             s.executeUpdate("CREATE DATABASE IF NOT EXISTS USUARIOS");
+            crearTablas();
             s.close();
             conexion = DriverManager.getConnection(url, user, pass);
         } catch (SQLException ex) {
@@ -42,26 +42,24 @@ public class DbConnection {
     /**
      * Método que crea las tablas de la base de datos en caso de que no existan
      */
-    public void crearTablas() {
-
+    public void crearTablas() throws SQLException {
         Statement s;
         try {
             s = conexion.createStatement();
 
-            s.executeUpdate("CREATE TABLE IF NOT EXISTS TipoUsuario (idTipoUsuario BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idTipoUsuario), descripcion VARCHAR(200)");
-            System.out.println("La tabla \"TIPO_USUARIO\" ha sido creada correctamente");
+            s.executeUpdate("CREATE TABLE IF NOT EXISTS TipoUsuario (idTipoUsuario BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idTipoUsuario), descripcion VARCHAR(200))");
+            //System.out.println("La tabla \"TipoUsuario\" ha sido creada correctamente");
 
-            s.executeUpdate("CREATE TABLE IF NOT EXISTS Documento (idDocumento BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idDocumento), descripcion VARCHAR(200)");
-            System.out.println("La tabla \"Documento\" ha sido creada correctamente");
+            s.executeUpdate("CREATE TABLE IF NOT EXISTS Documento (idDocumento BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idDocumento), descripcion VARCHAR(200))");
+            //System.out.println("La tabla \"Documento\" ha sido creada correctamente");
 
-            s.executeUpdate("CREATE TABLE IF NOT EXISTS Persona (idPersona BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idPersona), nombre VARCHAR(80), apellido VARCHAR(80), tipoDni BIGINT(20), FOREIGN KEY(tipoDni) REFERENCES Documento(idDocumento), nroDocumento VARCHAR(30) ");
-            System.out.println("La tabla \"Persona\" ha sido creada correctamente");
+            s.executeUpdate("CREATE TABLE IF NOT EXISTS Persona (idPersona BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idPersona), nombre VARCHAR(80), apellido VARCHAR(80), tipoDni BIGINT(20), FOREIGN KEY(tipoDni) REFERENCES Documento(idDocumento), nroDocumento VARCHAR(30) )");
+            //System.out.println("La tabla \"Persona\" ha sido creada correctamente");
 
-            s.executeUpdate("CREATE TABLE IF NOT EXISTS Usuario (idUsuario BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idUsuario), nombreUsuario VARCHAR(80), passUsuario VARCHAR(80), idPersona BIGINT(20), FOREIGN KEY( idPersona) REFERENCES Persona(idPersona), idTipoUsuario BIGINT(20), FOREIGN KEY(idTipoUsuario) REFERENCES TipoUsuario(idTipoUsuario)");
-            System.out.println("La tabla \"USUARIO\" ha sido creada correctamente");
+            s.executeUpdate("CREATE TABLE IF NOT EXISTS Usuario (idUsuario BIGINT(20) AUTO_INCREMENT, PRIMARY KEY(idUsuario), nombreUsuario VARCHAR(80), passUsuario VARCHAR(80), idPersona BIGINT(20), FOREIGN KEY( idPersona) REFERENCES Persona(idPersona), idTipoUsuario BIGINT(20), FOREIGN KEY(idTipoUsuario) REFERENCES TipoUsuario(idTipoUsuario))");
+            //System.out.println("La tabla \"USUARIO\" ha sido creada correctamente");
         } catch (SQLException ex) {
-            System.out.println("Las tablas ya se encontraban creadas " + ex);
-
+            System.out.println("Error al crear las tablas: " + ex);
         }
 
     }
@@ -177,6 +175,31 @@ public class DbConnection {
             System.out.println("No se puedo establecer conexión con la base de datos");
         }
         return tipoUsuarioEsta;
+    }
+
+    /**
+     * Lista por consola los tipos de usuarios que se encuentran registrados en la base de datos
+     */
+    public void listarTipoUsuario(){
+        Statement stmt;
+        String buscarTipoUsuario;
+        ResultSet result = null;
+        boolean tipoUsuarioEsta = false;
+
+        buscarTipoUsuario = "SELECT * FROM TipoUsuario";
+
+        try {
+            stmt = conexion.createStatement();
+            result = stmt.executeQuery(buscarTipoUsuario);
+
+            while(result.next()){
+                System.out.println("Id: " + result.getInt(1) + ", Tipo de usuario: " + result.getString(2));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("No se puedo establecer conexión con la base de datos");
+        }
+
     }
 
 
