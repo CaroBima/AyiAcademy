@@ -46,9 +46,15 @@ public class DbConnection {
         }
     }
 
+    /**
+     * Permite establecer la conexion desde los repositorios
+     * @return
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(urlCompleta, user, pass);
     }
+
     /**
      * Método que crea las tablas de la base de datos en caso de que no existan
      */
@@ -73,91 +79,7 @@ public class DbConnection {
         }
 
     }
-
-    /**
-     * Permite registrar un nuevo tipo de documento en la base de datos.
-     * Primero verifica si el tipo de documento ya se encuentra almacenado, si no está registrado lo guarda, si ya se encuentra registrado
-     * informa que el tipo de documento ya se encuentra guardado en la base de datos
-     * @param documento
-     */
-    public void registrarDocumento(Documento documento) {
-        Statement stmt;
-        String agregarDocumento;
-        Boolean estaRegistrado = buscarDocumento(documento);
-
-        if(!estaRegistrado){
-            agregarDocumento = "INSERT INTO Documento (descripcion) VALUES('" + documento.getDescripción() +"')";
-
-            try {
-                stmt = conexion.createStatement();
-                String st_inserta = agregarDocumento;
-                stmt.executeUpdate(st_inserta);
-                System.out.println("El tipo de documento " + documento.getDescripción() + " se cargo correctamente");
-            } catch (SQLException ex) {
-                System.out.println("El tipo de dni " +  documento.getDescripción()  + " no han podido ser guardado");
-            }
-        }else{
-            System.out.println("El tipo de dni " +  documento.getDescripción()  + " ya se encontraba previamente registrado en la base de datos");
-        }
-    }
-
-
-
-    /**
-     * Verifica si el documento que recibe por parámetros ya está en la base de datos. Devuelve true en caso de que este y false si no está.
-     * @param documento
-     * @return boolean
-     */
-    public boolean buscarDocumento(Documento documento){
-        Statement stmt;
-        String buscarDoc;
-        ResultSet result = null;
-        boolean documentoEsta = false;
-
-        buscarDoc = "SELECT * FROM Documento WHERE descripción = '" + documento.getDescripción();
-
-        try {
-            stmt = conexion.createStatement();
-            result = stmt.executeQuery(buscarDoc);
-
-            if (result.next()){
-                documentoEsta = true;
-            }
-            else{
-                documentoEsta = false;
-            }
-        } catch (SQLException ex) {
-            System.out.println("No se puedo establecer conexión con la base de datos");
-        }
-        return documentoEsta;
-    }
-
-
-
-    /**
-     * Lista por consola los tipos de usuarios que se encuentran registrados en la base de datos
-     */
-    public void listarTipoUsuario(){
-        Statement stmt;
-        String buscarTipoUsuario;
-        ResultSet result = null;
-        boolean tipoUsuarioEsta = false;
-
-        buscarTipoUsuario = "SELECT * FROM TipoUsuario";
-
-        try {
-            stmt = conexion.createStatement();
-            result = stmt.executeQuery(buscarTipoUsuario);
-
-            while(result.next()){
-                System.out.println("Id: " + result.getInt(1) + ", Tipo de usuario: " + result.getString(2));
-            }
-
-        } catch (SQLException ex) {
-            System.out.println("No se puedo establecer conexión con la base de datos");
-        }
-
-    }
-
-
 }
+
+
+

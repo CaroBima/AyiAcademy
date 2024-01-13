@@ -5,15 +5,15 @@ Documentos (Número de documento, descripción)
  */
 public class Documento {
     private Long idDocumento;
-    private String descripción;
+    private String descripcion;
 
     //constructor
     public Documento() {
     }
 
-    public Documento(Long idDocumento, String descripción) {
+    public Documento(Long idDocumento, String descripcion) {
         this.idDocumento = idDocumento;
-        this.descripción = descripción;
+        this.descripcion = descripcion;
     }
 
     //getters y setters
@@ -25,11 +25,11 @@ public class Documento {
         this.idDocumento = idDocumento;
     }
 
-    public String getDescripción() {
-        return descripción;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

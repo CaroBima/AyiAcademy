@@ -1,6 +1,9 @@
 import model.TipoUsuario;
 import repository.DbConnection;
+import repository.DocumentoRepository;
 import repository.TipoUsuarioRepository;
+import servicios.DocumentoService;
+import servicios.TipoUsuarioService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +13,7 @@ import java.io.InputStreamReader;
 public class Principal {
     public static void main(String[] args) throws IOException {
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
-        DbConnection  dbconection = new DbConnection();
+
         int opcionSeleccionada = 999;
 
         do {
@@ -19,32 +22,44 @@ public class Principal {
             opcionSeleccionada = Integer.parseInt(input);
 
             switch (opcionSeleccionada) {
-                case 0:
+                case 0: //salir
                     System.out.println("Chau!");
                     break;
-                case 1:
-                    System.out.println("Aún en desarrollo");
-                    break;
-                case 2: //carga un nuevo tipo de usuario, ingresado por teclado
-                    TipoUsuario nuevoTipoUsuario = cargarTipoUsuario();
-                    TipoUsuarioRepository tipoUsuRepo = new TipoUsuarioRepository();
-                    tipoUsuRepo.registrarTipoUsuario(nuevoTipoUsuario);
-                    break;
-                case 3:
-                    System.out.println("Aún en desarrollo");
 
-                    break;
-                case 4:
+                case 1: //cargar un usuario
                     System.out.println("Aún en desarrollo");
                     break;
-                case 5:
+
+                case 2: //carga un nuevo tipo de usuario, ingresado por teclado
+                    TipoUsuarioService nuevoTipoUsuarioService = new TipoUsuarioService();
+                    nuevoTipoUsuarioService.registrarTipoUsuario(); //permite ingresar y guarda el nuevo usuario ingresado
+                    break;
+
+                case 3: //carga un tipo de documento nuevo
+                    DocumentoService docuService = new DocumentoService();
+                    docuService.registrarDocumento();
+                    break;
+
+                case 4: //consulta por nombre de usuario
+                    System.out.println("Aún en desarrollo");
+                    break;
+
+                case 5: //lista de usuarios registrados
+                    nuevoTipoUsuarioService = new TipoUsuarioService();
                     System.out.println("********************************************");
                     System.out.println("       Listado de usuarios registrados:     ");
                     System.out.println("********************************************");
-                    dbconection.listarTipoUsuario();
+                    nuevoTipoUsuarioService.listarTipoUsuario();
+                    break;
+
+                case 6: //lista todos los tipos de documentos registrados
+                    docuService = new DocumentoService();
+                    System.out.println("********************************************");
+                    System.out.println("       Tipos de documento registrados:      ");
+                    System.out.println("********************************************");
+                    docuService.listarDocumentos();
                     break;
             }
-
         }while(opcionSeleccionada != 0);
     }
 
@@ -57,6 +72,8 @@ public class Principal {
      */
     private static String mostrarMenu(BufferedReader entrada) throws IOException {
         String input;
+        int cantOpciones = 6; //si se agregan nuevas opciones se modifica el numero maximo de opciones desde aca
+
         System.out.println(" ");
         System.out.println("********************************************");
         System.out.println("              Menú de opciones              ");
@@ -66,6 +83,7 @@ public class Principal {
         System.out.println("  3 - Cargar un Tipo de documento");
         System.out.println("  4 - Consultar por nombre de usuario");
         System.out.println("  5 - Listar tipos de usuarios registrados");
+        System.out.println("  6 - Listar tipos de documentos registrados");
         System.out.println("  0 - Salir");
         System.out.print(  "Ingrese el número de opción: ");
         input = entrada.readLine();
@@ -73,15 +91,15 @@ public class Principal {
 
         //Valído si no es número, si no es, pide que ingrese nuevamente el valor hasta que lo sea
         while(!esNumero(input)){
-            System.out.println("El valor ingresado debe ser un valor numérico entre 0 y 5.");
+            System.out.println("El valor ingresado debe ser un valor numérico entre 0 y " + cantOpciones + ".");
             System.out.print("Ingrese nuevamente la opción: ");
             input = entrada.readLine();
         };
 
         //Valido que el valor numérico ingresado esté entre los posibles, si no está entre esos valores solicita que
         // se ingrese nuevamente hasta que cumpla la condición
-        while(esNumero(input) && (Integer.parseInt(input)<0 || Integer.parseInt(input)>5)){
-            System.out.println("El número ingresado debe estar entre 0 y 5.");
+        while(esNumero(input) && (Integer.parseInt(input)<0 || Integer.parseInt(input)>cantOpciones)){
+            System.out.println("El número ingresado debe estar entre 0 y " + cantOpciones + ".");
             System.out.print("Ingrese nuevamente la opción: ");
             input = entrada.readLine();
         };
@@ -108,20 +126,5 @@ public class Principal {
         return resultado;
     }
 
-    /**
-     * Permite realizar la carga de un nuevo tipo de usuario en la base de datos
-     * @return tipoUsuario, el nuevo tipo de usuario que será guardado en la base de datos
-     * @throws IOException
-     */
-    private static TipoUsuario cargarTipoUsuario() throws IOException {
-        TipoUsuario tipoUsuario = new TipoUsuario();
-        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print("Ingrese la descripción del tipo de usuario: ");
-        String descripcion = entrada.readLine();
-
-        tipoUsuario.setDescripcion(descripcion);
-
-        return tipoUsuario;
-    }
 }
