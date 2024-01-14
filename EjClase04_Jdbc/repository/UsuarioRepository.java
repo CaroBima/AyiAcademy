@@ -2,10 +2,7 @@ package repository;
 
 import model.Usuario;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class UsuarioRepository {
 
@@ -38,27 +35,35 @@ public class UsuarioRepository {
     /**
      * Permite registrar un nuevo usuario en la base de datos. Valida primero si el mismo ya se encuentra registrado
      */
-    public void registrarUsuario(Usuario usuario){
+    public Long registrarUsuario(Usuario usuario){
+        Long idUsuario = 0L;
         try {
             conexion = DbConnection.getConnection();
             Statement stmt;
             String agregarUsuario;
             Boolean estaRegistrado = buscarUsuario(usuario);
 
-            //System.out.println(usuario.getNombreUsuario() + " " + usuario.getPassUsuario() + " " + usuario.getIdPersona() + " " + usuario.getIdTipoUsuario());
-
             if (!estaRegistrado) {
-                PersonaRepository personaRepo = new PersonaRepository();
-
                 agregarUsuario = "INSERT INTO Usuario (nombreUsuario, passUsuario, idPersona, idTipoUsuario) VALUES('" + usuario.getNombreUsuario() + "', '"+ usuario.getPassUsuario() + "', '" + usuario.getIdPersona() + "', '" + usuario.getIdTipoUsuario() + "')";
-
                 try {
                     stmt = conexion.createStatement();
-                    String st_inserta = agregarUsuario;
-                    stmt.executeUpdate(st_inserta);
-                    System.out.println("El usuario " + usuario.getNombreUsuario() + " se cargo correctamente");
+                    PreparedStatement pstmt = conexion.prepareStatement(agregarUsuario, Statement.RETURN_GENERATED_KEYS);
+
+                    int filasAfectadas = pstmt.executeUpdate();
+
+                    if (filasAfectadas > 0) {
+                        // Obtener la clave generadas
+                        ResultSet generatedKeys = pstmt.getGeneratedKeys();
+
+                        if (generatedKeys.next()) {
+                            // Obtener el índice de la fila insertada
+                            idUsuario = generatedKeys.getLong(1);
+                            System.out.println(idUsuario);
+                        }
+                    }
+                    System.out.println("El usuario " + usuario.getNombreUsuario() + " se cargó correctamente");
                 } catch (SQLException ex) {
-                    System.out.println("El tipo de usuario " + usuario.getNombreUsuario() + " no han podido ser guardado " + ex);
+                    System.out.println("El tipo de usuario " + usuario.getNombreUsuario() + " no ha podido ser guardado " + ex);
                 }
             } else {
                 System.out.println("El tipo de usuario " + usuario.getNombreUsuario() + " ya se encontraba previamente registrado en la base de datos");
@@ -66,7 +71,7 @@ public class UsuarioRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return idUsuario;
     }
 
     private boolean buscarUsuario(Usuario usuario){

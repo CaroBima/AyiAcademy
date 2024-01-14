@@ -1,4 +1,5 @@
 import model.TipoUsuario;
+import model.Usuario;
 import repository.DbConnection;
 import repository.DocumentoRepository;
 import repository.TipoUsuarioRepository;
@@ -32,6 +33,7 @@ public class Principal {
                 case 1: //cargar un usuario
                     UsuarioService usuarioService = new UsuarioService();
                     usuarioService.registrarUsuario();
+
                     break;
 
                 case 2: //carga un nuevo tipo de usuario, ingresado por teclado

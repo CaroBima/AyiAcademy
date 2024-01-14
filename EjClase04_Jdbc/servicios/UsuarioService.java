@@ -2,7 +2,6 @@ package servicios;
 
 import model.Persona;
 import model.Usuario;
-import repository.TipoUsuarioRepository;
 import repository.UsuarioRepository;
 
 import java.io.BufferedReader;
@@ -24,11 +23,12 @@ public class UsuarioService {
      * Si el id de usuario es cero, no lo registra
      * @throws IOException
      */
-    public void registrarUsuario() throws IOException {
+    public void  registrarUsuario() throws IOException {
         Usuario usuario = cargarUsuario();
-        if(usuario.getIdUsuarios() != 0) {
-            usuarioRepo.registrarUsuario(usuario);
-        }
+
+        //si el usuario y la persona están cargados lo registra
+        usuarioRepo.registrarUsuario(usuario);
+
     }
 
     /**
@@ -69,21 +69,30 @@ public class UsuarioService {
 
         Long idPersona = personaService.cargarPersona();
 
+        //si se ingresaron correctamente los datos de la persona sigue solictando info:
+        if(idPersona != 0) {
+            do { //valido si el id del tipo de usuario esta en la base de datos, si no esta vuelve a pedirlo
+                System.out.print("Id tipo de usuario (0 para cancelar): ");
+                idTipoUsuario = Long.valueOf(entrada.readLine());
+                existeTipoUsuario = tipoUsuarioService.existeTipoUsuario(idTipoUsuario);
 
-        do{ //valido si el id del tipo de usuario esta en la base de datos, si no esta vuelve a pedirlo
-            System.out.print("Id tipo de usuario (0 para cancelar): ");
-            idTipoUsuario = Long.valueOf(entrada.readLine());
-            existeTipoUsuario = tipoUsuarioService.existeTipoUsuario(idTipoUsuario);
-
-            if(!existeTipoUsuario)
-                System.out.println("El tipo de usuario no existe, por favor intentar nuevamente o 0 para salir");
-        }while(!existeTipoUsuario || idTipoUsuario ==0);
+                if (!existeTipoUsuario) {
+                    System.out.println("El tipo de usuario no existe, por favor intentar nuevamente o 0 para salir");
+                    usuario.setIdUsuarios(0L);
+                }
+            } while (!existeTipoUsuario && idTipoUsuario != 0);
+        }else{
+            idTipoUsuario = 0L;
+            usuario.setIdUsuarios(0L); //no se registro, se setea en 0 para que no quede null
+        }
 
         usuario.setNombreUsuario(nombreUsuario);
         usuario.setPassUsuario(passUsuario);
         usuario.setIdPersona(idPersona);
         usuario.setIdTipoUsuario(idTipoUsuario);
 
+
+        //registrarUsuario(usuario);
 
         return usuario;
     }

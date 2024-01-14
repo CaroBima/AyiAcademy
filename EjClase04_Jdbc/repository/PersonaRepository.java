@@ -30,7 +30,6 @@ public class PersonaRepository {
                     stmt = conexion.createStatement();
                     String st_inserta = agregarTipoUsuario;
                     stmt.executeUpdate(st_inserta);
-                    //System.out.println(persona.getNombre() + " " + persona.getApellido() + " se cargo correctamente");
                 } catch (SQLException ex) {
                     System.out.println(persona.getNombre() + " " + persona.getApellido() + " no han podido ser guardado");
                 }
