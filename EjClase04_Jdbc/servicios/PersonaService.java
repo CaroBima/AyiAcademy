@@ -37,6 +37,11 @@ public class PersonaService {
             System.out.print("Id de tipo de documento (0 para cancelar): ");
             tipoDni = Long.valueOf(entrada.readLine());
             existeTipoDocumento = documentoService.existeTipoDocumento(tipoDni);
+
+            if (!existeTipoDocumento) {
+                System.out.println("El tipo dedocumento no existe, por favor intentar nuevamente o 0 para salir");
+                persona.setIdPersona(0L);
+            }
         }while(!existeTipoDocumento && tipoDni != 0);
 
         if(tipoDni !=0) { //si se ingreso un tipo de dni valido y no se ingreso 0 para cancelar
@@ -66,8 +71,8 @@ public class PersonaService {
      */
     private Long registrarPersona(Persona persona){
         PersonaRepository personaRepo = new PersonaRepository();
-        personaRepo.guardarPersona(persona);
-
+            personaRepo.guardarPersona(persona);
+        
         return personaRepo.buscarIdPersona(persona);
     }
 }

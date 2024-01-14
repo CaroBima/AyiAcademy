@@ -2,7 +2,6 @@ package servicios;
 
 import model.Documento;
 import repository.DocumentoRepository;
-import repository.TipoUsuarioRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
