@@ -1,8 +1,6 @@
 package model;
 
-/*
-Documentos (Número de documento, descripción)
- */
+
 public class Documento {
     private Long idDocumento;
     private String descripcion;

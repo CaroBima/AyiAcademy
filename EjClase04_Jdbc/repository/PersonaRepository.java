@@ -12,6 +12,8 @@ public class PersonaRepository {
 
     /**
      * Recibe los datos de una persona por parámetro y los guarda en la base de datos
+     * Valida si la persona se encuentra ya guardada y si no lo está la guarda (la validación se hace buscando por nombre,
+     * apellido y dni)
      * @param persona
      */
     public void guardarPersona(Persona persona){
@@ -28,7 +30,7 @@ public class PersonaRepository {
                     stmt = conexion.createStatement();
                     String st_inserta = agregarTipoUsuario;
                     stmt.executeUpdate(st_inserta);
-                    System.out.println(persona.getNombre() + " " + persona.getApellido() + " se cargo correctamente");
+                    //System.out.println(persona.getNombre() + " " + persona.getApellido() + " se cargo correctamente");
                 } catch (SQLException ex) {
                     System.out.println(persona.getNombre() + " " + persona.getApellido() + " no han podido ser guardado");
                 }
@@ -67,5 +69,26 @@ public class PersonaRepository {
         }
 
         return PersonaEsta;
+    }
+
+    public Long buscarIdPersona(Persona persona){
+        String busquedaPersona = "Select idPersona from persona where nombre='" + persona.getNombre() + "' and apellido ='" + persona.getApellido() + "' and nroDocumento='"+ persona.getNroDocumento()+"'";
+        ResultSet result = null;
+        Statement stmt;
+        Long idPersona = 0L;
+
+        try {
+            stmt = conexion.createStatement();
+            result = stmt.executeQuery(busquedaPersona);
+
+            if (result.next()) {
+                idPersona = result.getLong(1);
+            } else {
+                idPersona = 0L;
+            }
+        } catch (SQLException ex) {
+            System.out.println("No se puedo establecer conexión con la base de datos");
+        }
+        return idPersona;
     }
 }

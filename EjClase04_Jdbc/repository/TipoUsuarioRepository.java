@@ -101,6 +101,32 @@ public class TipoUsuarioRepository {
         } catch (SQLException ex) {
             System.out.println("No se puedo establecer conexión con la base de datos");
         }
+    }
 
+    /**
+     * Método que permite buscar un id de tipo de usuario para verificar si existe en la base de datos
+     * Devuelve true si está y false si no se encontró.
+     * @param idTipoUsuario
+     * @return
+     */
+    public boolean existeTipoUsuario(Long idTipoUsuario){
+        Statement stmt;
+        String buscaridTipoUsuario;
+        ResultSet result = null;
+        boolean tipoUsuarioEsta = false;
+
+        buscaridTipoUsuario = "SELECT * FROM TipoUsuario where idTipoUsuario="+ idTipoUsuario;
+
+        try {
+            conexion = DbConnection.getConnection();
+            stmt = conexion.createStatement();
+            result = stmt.executeQuery(buscaridTipoUsuario);
+
+            tipoUsuarioEsta = (result.next()) ? true : false;
+
+        } catch (SQLException ex) {
+            System.out.println("No se puedo establecer conexión con la base de datos");
+        }
+        return tipoUsuarioEsta;
     }
 }

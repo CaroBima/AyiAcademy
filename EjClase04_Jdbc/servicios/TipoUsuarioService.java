@@ -49,4 +49,10 @@ public class TipoUsuarioService {
         TipoUsuarioRepository tipoUsuRepo = new TipoUsuarioRepository();
         tipoUsuRepo.listarTipoUsuario();
     }
+
+
+    public boolean existeTipoUsuario(Long idTipoUsuario){
+        TipoUsuarioRepository tipoUsuRepo = new TipoUsuarioRepository();
+        return tipoUsuRepo.existeTipoUsuario(idTipoUsuario);
+    }
 }

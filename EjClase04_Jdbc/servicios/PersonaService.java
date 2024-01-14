@@ -9,20 +9,33 @@ import java.io.InputStreamReader;
 
 public class PersonaService {
 
-    public Persona cargarPersona() throws IOException {
+    /**
+     * Permite ingresar los datos de una nueva persona por teclado
+     * @return Persona - devuelve la persona guardada
+     * @throws IOException
+     */
+    public Long cargarPersona() throws IOException {
         String nombre;
         String apellido;
         Long tipoDni;
         String nroDocumento;
         Persona persona = new Persona();
+        DocumentoService  documentoService= new DocumentoService();
+        boolean existeTipoDocumento = false;
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.print("Nombre: ");
         nombre = entrada.readLine();
         System.out.print("Apellido: ");
         apellido = entrada.readLine();
-        System.out.print("Id de tipo de documento: ");
-        tipoDni = Long.valueOf(entrada.readLine());
+
+        do {
+            System.out.print("Id de tipo de documento (0 para cancelar): ");
+            tipoDni = Long.valueOf(entrada.readLine());
+            existeTipoDocumento = documentoService.existeTipoDocumento(tipoDni);
+            System.out.println("dentro del do de cargar persona. Existetipodocumento: " + existeTipoDocumento); //-<<<<<<<<<<<<<<<<<
+        }while(!existeTipoDocumento && tipoDni != 0);
+
         System.out.print("Nro de documento: ");
         nroDocumento = entrada.readLine();
 
@@ -31,11 +44,18 @@ public class PersonaService {
         persona.setTipoDni(tipoDni);
         persona.setNroDocumento(nroDocumento);
 
-        return persona;
+        Long idPersona = registrarPersona(persona);
+        return idPersona;
     }
 
-    private void registrarPersona(Persona persona){
+    /**
+     * Permite el registro de una nueva persona en la base de datos
+     * @param persona
+     */
+    private Long registrarPersona(Persona persona){
         PersonaRepository personaRepo = new PersonaRepository();
-        //personaRepo.
+        personaRepo.guardarPersona(persona);
+
+        return personaRepo.buscarIdPersona(persona);
     }
 }

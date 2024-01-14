@@ -4,6 +4,7 @@ import repository.DocumentoRepository;
 import repository.TipoUsuarioRepository;
 import servicios.DocumentoService;
 import servicios.TipoUsuarioService;
+import servicios.UsuarioService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.io.InputStreamReader;
 public class Principal {
     public static void main(String[] args) throws IOException {
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        DbConnection dbConnection = new DbConnection(); //crea la base de datos si no esta creada
+
 
         int opcionSeleccionada = 999;
 
@@ -27,7 +30,8 @@ public class Principal {
                     break;
 
                 case 1: //cargar un usuario
-                    System.out.println("Aún en desarrollo");
+                    UsuarioService usuarioService = new UsuarioService();
+                    usuarioService.registrarUsuario();
                     break;
 
                 case 2: //carga un nuevo tipo de usuario, ingresado por teclado
@@ -41,18 +45,27 @@ public class Principal {
                     break;
 
                 case 4: //consulta por nombre de usuario
-                    System.out.println("Aún en desarrollo");
+                    usuarioService = new UsuarioService();
+                    usuarioService.buscarNombreUsuario();
                     break;
 
-                case 5: //lista de usuarios registrados
+                case 5: //lista todos los usuarios almacenados en la base de datos
+                    System.out.println("********************************************");
+                    System.out.println("      Listado de usuarios registrados:      ");
+                    System.out.println("********************************************");
+                    usuarioService = new UsuarioService();
+                    usuarioService.listarUsuarios();
+                    break;
+
+                case 6: //lista de usuarios registrados
                     nuevoTipoUsuarioService = new TipoUsuarioService();
                     System.out.println("********************************************");
-                    System.out.println("       Listado de usuarios registrados:     ");
+                    System.out.println("  Listado de tipos de usuarios registrados: ");
                     System.out.println("********************************************");
                     nuevoTipoUsuarioService.listarTipoUsuario();
                     break;
 
-                case 6: //lista todos los tipos de documentos registrados
+                case 7: //lista todos los tipos de documentos registrados
                     docuService = new DocumentoService();
                     System.out.println("********************************************");
                     System.out.println("       Tipos de documento registrados:      ");
@@ -72,7 +85,7 @@ public class Principal {
      */
     private static String mostrarMenu(BufferedReader entrada) throws IOException {
         String input;
-        int cantOpciones = 6; //si se agregan nuevas opciones se modifica el numero maximo de opciones desde aca
+        int cantOpciones = 7; //si se agregan nuevas opciones se modifica el numero maximo de opciones desde aca
 
         System.out.println(" ");
         System.out.println("********************************************");
@@ -82,8 +95,9 @@ public class Principal {
         System.out.println("  2 - Cargar un Tipo de usuario");
         System.out.println("  3 - Cargar un Tipo de documento");
         System.out.println("  4 - Consultar por nombre de usuario");
-        System.out.println("  5 - Listar tipos de usuarios registrados");
-        System.out.println("  6 - Listar tipos de documentos registrados");
+        System.out.println("  5 - Listar usuarios registrados");
+        System.out.println("  6 - Listar tipos de usuarios registrados");
+        System.out.println("  7 - Listar tipos de documentos registrados");
         System.out.println("  0 - Salir");
         System.out.print(  "Ingrese el número de opción: ");
         input = entrada.readLine();

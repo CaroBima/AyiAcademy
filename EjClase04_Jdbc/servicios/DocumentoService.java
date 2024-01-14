@@ -2,11 +2,16 @@ package servicios;
 
 import model.Documento;
 import repository.DocumentoRepository;
+import repository.TipoUsuarioRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Servicio que proporciona métodos para obtener información sobre los tipos de documentos
+ *
+ */
 public class DocumentoService {
     DocumentoRepository docuRepo = new DocumentoRepository();
 
@@ -21,6 +26,9 @@ public class DocumentoService {
         docuRepo.registrarDocumento(documento);
     }
 
+    /**
+     * Método que permite mostrar los tipos de documentos que se encuentran almacenados en la base de datos
+     */
     public void listarDocumentos(){
         docuRepo.listarTiposDocumentos();
     }
@@ -42,5 +50,9 @@ public class DocumentoService {
         return nuevoDoc;
     }
 
+    public boolean existeTipoDocumento(Long idDocumento){
+        DocumentoRepository documentoRepository = new DocumentoRepository();
+        return documentoRepository.buscarTipoDocumento(idDocumento);
+    }
 
 }

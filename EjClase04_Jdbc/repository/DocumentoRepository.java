@@ -79,6 +79,25 @@ public class DocumentoRepository {
         return documentoEsta;
     }
 
+    public boolean buscarTipoDocumento(Long idDocumento){
+        Statement stmt;
+        String buscarDoc;
+        ResultSet result = null;
+        boolean tipoDocumentoEsta = false;
+
+        buscarDoc = "SELECT * FROM Documento WHERE idDocumento = '" + idDocumento +"'";
+
+        try {
+            conexion = DbConnection.getConnection();
+            stmt = conexion.createStatement();
+            result = stmt.executeQuery(buscarDoc);
+
+            tipoDocumentoEsta=  (result.next()) ? true : false;
+        } catch (SQLException ex) {
+            System.out.println("No se puedo establecer conexión con la base de datos");
+        }
+        return tipoDocumentoEsta;
+    }
 
     /**
      * Método encargado de listar todos los tipos de documentos que se encuentran almacenados en la base de datos
