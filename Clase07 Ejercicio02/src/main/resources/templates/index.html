@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Coming Soon Evening</title>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery.countdown.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <div class="wrapper">
+           <div class="opacity"></div>
+            <div class="gravity">
+               <div class="container">
+                   <div class=" row">
+                       <div class="col-md-12">
+                       <img class="logo" src="img/gravity.png" alt="Gravity">
+                       <h1 th:text="${titulo}">Our website is coming soon</h1>
+                       </div>
+                   </div>
+               </div>
+            </div>
+           <!--<div id="countdown"></div>-->
+
+               <div class="container">
+                   <div class=" row">
+                       <div class="col-md-12 ">
+                           <table>
+                           <tr  class="text-white" th:each="pais: ${listaPaises}">
+                               <td class="text-white" th:text="${pais.key}" />
+                               <td class="text-white" th:text="${pais.value}" />
+                           </tr>
+                           </table>
+
+                       </div>
+                   </div>
+            </div>
+    
+
+        </div>
+    	
+		<script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.countdown.js"></script>
+        <script src="js/active.js"></script>
+    
+    
+    </body>
+
+
+</html>
