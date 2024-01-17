@@ -76,7 +76,7 @@ public class UsuarioService {
                 idTipoUsuario = Long.valueOf(entrada.readLine());
                 existeTipoUsuario = tipoUsuarioService.existeTipoUsuario(idTipoUsuario);
 
-                if (!existeTipoUsuario) {
+                if (!existeTipoUsuario && idTipoUsuario !=0) {
                     System.out.println("El tipo de usuario no existe, por favor intentar nuevamente o 0 para salir");
                     usuario.setIdUsuarios(0L);
                 }

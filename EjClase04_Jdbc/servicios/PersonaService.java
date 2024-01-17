@@ -38,8 +38,8 @@ public class PersonaService {
             tipoDni = Long.valueOf(entrada.readLine());
             existeTipoDocumento = documentoService.existeTipoDocumento(tipoDni);
 
-            if (!existeTipoDocumento) {
-                System.out.println("El tipo dedocumento no existe, por favor intentar nuevamente o 0 para salir");
+            if (!existeTipoDocumento && tipoDni != 0) {
+                System.out.println("El tipo de documento no existe, por favor intentar nuevamente o 0 para salir");
                 persona.setIdPersona(0L);
             }
         }while(!existeTipoDocumento && tipoDni != 0);

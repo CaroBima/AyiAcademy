@@ -1,8 +1,5 @@
-import model.TipoUsuario;
-import model.Usuario;
+
 import repository.DbConnection;
-import repository.DocumentoRepository;
-import repository.TipoUsuarioRepository;
 import servicios.DocumentoService;
 import servicios.TipoUsuarioService;
 import servicios.UsuarioService;

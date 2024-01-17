@@ -44,7 +44,7 @@ public class UsuarioRepository {
             Boolean estaRegistrado = buscarUsuario(usuario);
 
             if (!estaRegistrado) {
-                agregarUsuario = "INSERT INTO Usuario (nombreUsuario, passUsuario, idPersona, idTipoUsuario) VALUES('" + usuario.getNombreUsuario() + "', '"+ usuario.getPassUsuario() + "', '" + usuario.getIdPersona() + "', '" + usuario.getIdTipoUsuario() + "')";
+                agregarUsuario = "INSERT INTO Usuario (nombreUsuario, passUsuario, idPersona, idTipoUsuario) VALUES('" + usuario.getNombreUsuario() + "', '"+ usuario.getPassUsuario() + "', '"+ usuario.getIdPersona() + "', '" + usuario.getIdTipoUsuario() + "')";
                 try {
                     stmt = conexion.createStatement();
                     PreparedStatement pstmt = conexion.prepareStatement(agregarUsuario, Statement.RETURN_GENERATED_KEYS);
@@ -58,12 +58,12 @@ public class UsuarioRepository {
                         if (generatedKeys.next()) {
                             // Obtener el índice de la fila insertada
                             idUsuario = generatedKeys.getLong(1);
-                            System.out.println(idUsuario);
+                            //System.out.println(idUsuario);
                         }
                     }
                     System.out.println("El usuario " + usuario.getNombreUsuario() + " se cargó correctamente");
                 } catch (SQLException ex) {
-                    System.out.println("El tipo de usuario " + usuario.getNombreUsuario() + " no ha podido ser guardado " + ex);
+                    //System.out.println("El tipo de usuario " + usuario.getNombreUsuario() + " no ha podido ser guardado " + ex);
                 }
             } else {
                 System.out.println("El tipo de usuario " + usuario.getNombreUsuario() + " ya se encontraba previamente registrado en la base de datos");

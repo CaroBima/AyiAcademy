@@ -37,7 +37,7 @@ public class TipoUsuarioRepository {
                     stmt.executeUpdate(st_inserta);
                     System.out.println("El tipo de usuario " + tipoUsuario.getDescripcion() + " se cargo correctamente");
                 } catch (SQLException ex) {
-                    System.out.println("El tipo de usuario " + tipoUsuario.getDescripcion() + " no han podido ser guardado");
+                    ex.printStackTrace();
                 }
             } else {
                 System.out.println("El tipo de usuario " + tipoUsuario.getDescripcion() + " ya se encontraba previamente registrado en la base de datos");
@@ -62,7 +62,7 @@ public class TipoUsuarioRepository {
         ResultSet result = null;
         boolean tipoUsuarioEsta = false;
 
-        buscarTipoUsuario = "SELECT * FROM Documento WHERE descripción = '" + tipoUsuario;
+        buscarTipoUsuario = "SELECT * FROM Documento WHERE descripcion = '" + tipoUsuario + "'";
 
         try {
             stmt = conexion.createStatement();
@@ -74,7 +74,8 @@ public class TipoUsuarioRepository {
                 tipoUsuarioEsta = false;
             }
         } catch (SQLException ex) {
-            System.out.println("No se puedo establecer conexión con la base de datos");
+            //System.out.println("No se puedo establecer conexión con la base de datos");
+            ex.printStackTrace();
         }
         return tipoUsuarioEsta;
     }
@@ -99,7 +100,7 @@ public class TipoUsuarioRepository {
                 System.out.println("Id: " + result.getInt(1) + ", Tipo de usuario: " + result.getString(2));
             }
         } catch (SQLException ex) {
-            System.out.println("No se puedo establecer conexión con la base de datos");
+            System.out.println("No se puedo establecer conexión con la base de datos: " + ex);
         }
     }
 
@@ -125,7 +126,9 @@ public class TipoUsuarioRepository {
             tipoUsuarioEsta = (result.next()) ? true : false;
 
         } catch (SQLException ex) {
-            System.out.println("No se puedo establecer conexión con la base de datos");
+            System.out.println("No se puedo establecer conexión con la base de datos: " + ex);
+
+
         }
         return tipoUsuarioEsta;
     }

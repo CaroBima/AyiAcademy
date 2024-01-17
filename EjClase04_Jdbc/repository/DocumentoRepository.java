@@ -14,9 +14,6 @@ import java.sql.Statement;
 public class DocumentoRepository {
     Connection conexion;
 
-
-
-
     /**
      * Permite registrar un nuevo tipo de documento en la base de datos.
      * Primero verifica si el tipo de documento ya se encuentra almacenado, si no está registrado lo guarda, si ya se encuentra registrado
@@ -60,7 +57,7 @@ public class DocumentoRepository {
         ResultSet result = null;
         boolean documentoEsta = false;
 
-        buscarDoc = "SELECT * FROM Documento WHERE descripción = '" + documento.getDescripcion();
+        buscarDoc = "SELECT * FROM Documento WHERE descripcion = '" + documento.getDescripcion() + "'";
 
         try {
             conexion = DbConnection.getConnection();
@@ -74,7 +71,7 @@ public class DocumentoRepository {
                 documentoEsta = false;
             }
         } catch (SQLException ex) {
-            System.out.println("No se puedo establecer conexión con la base de datos");
+            System.out.println("No se puedo establecer conexión con la base de datos" + ex);
         }
         return documentoEsta;
     }
