@@ -1,2 +1,4 @@
+server:
+  port: 8081
 #variables:
 cadena : "Curso, Java Spring y React"
