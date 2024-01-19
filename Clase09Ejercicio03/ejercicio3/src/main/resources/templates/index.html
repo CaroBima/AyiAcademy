@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <title>Listado de autos</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Nro de patente</th>
+            <th>Titular</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Kilometraje</th>
+        </tr>
+        <tr th:each="auto: ${listaAutos}">
+            <td th:text="${auto.nroPatente}"></td>
+            <td th:text="${auto.nombreDuenio}"></td>
+            <td th:text="${auto.marca}"></td>
+            <td th:text="${auto.modelo}"></td>
+            <td th:text="${auto.kilometraje}"></td>
+        </tr>
+    </table>
+</body>
+</html>
