@@ -22,4 +22,21 @@ public class AutoController {
 
         return "index";
     }
+
+    /**
+     * Busca un vehículo por id y lo pasa a modificar.html para que pueda ser modificado
+     * @param idAuto
+     * @param model
+     * @return
+     */
+    @GetMapping("/editar/{idAuto}")
+    public String editarAuto(String idAuto, Model model){
+        System.out.println(idAuto);
+        //Auto auto = autoService.traerAutoById(idAuto);
+
+        //System.out.println(auto.getIdAuto());
+        //model.addAttribute("auto", auto);
+
+        return "modificar";
+    }
 }

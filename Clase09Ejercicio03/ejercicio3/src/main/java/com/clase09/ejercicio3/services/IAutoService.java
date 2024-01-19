@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IAutoService {
     public List<Auto> traerAutos();
+    public Auto traerAutoById(Integer idAuto);
 }

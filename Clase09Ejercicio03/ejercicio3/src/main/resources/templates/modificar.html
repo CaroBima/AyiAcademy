@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <title>Modificar Auto</title>
+</head>
+<body>
+    <h1>Modificar datos del vehículo</h1>
+
+    <form th:action="@{/guardar}" method="post" th:object="${auto}">
+        <input type="hidden" name="idAuto" th:field="*{idAuto}"/>
+        <br/>
+        <label for="nroPatente">Patente</label>
+        <input type="text" name="nroPatente" id="nroPatente" th:field="*{nroPatente}">
+      <!--  <label for="nombreDuenio">Titular</label>
+        <input type="text" name="nombreDuenio" id="nombreDuenio" th:field="*{auto.nombreDuenio}">
+        <label for="marca">Marca</label>
+        <input type="text" name="marca" id="marca" th:field="*{auto.marca}">
+        <label for="modelo">Modelo</label>
+        <input type="text" name="modelo" id="modelo" th:field="*{auto.modelo}">
+        <label for="kilometraje">Kilometraje</label>
+        <input type="text" name="kilometraje" id="kilometraje" th:field="*{auto.kilometraje}">-->
+
+        <input type="submit" name="guardar" value="Guardar"/>
+
+
+    </form>
+</body>
+</html>

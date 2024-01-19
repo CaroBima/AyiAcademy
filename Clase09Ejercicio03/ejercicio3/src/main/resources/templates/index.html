@@ -20,6 +20,7 @@
             <td th:text="${auto.marca}"></td>
             <td th:text="${auto.modelo}"></td>
             <td th:text="${auto.kilometraje}"></td>
+            <td> <a th:href="@{/editar/} + ${auto.idAuto}" th:text="Editar"/></td>
         </tr>
     </table>
 </body>

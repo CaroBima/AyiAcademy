@@ -15,4 +15,9 @@ public class AutoService implements IAutoService{
     public List<Auto> traerAutos(){
         return autoRepository.findAll();
     }
+
+    @Override
+    public Auto traerAutoById(Integer idAuto) {
+        return autoRepository.findById(idAuto).orElse(null);
+    }
 }
