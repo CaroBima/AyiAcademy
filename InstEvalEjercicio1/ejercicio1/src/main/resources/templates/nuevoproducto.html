@@ -5,29 +5,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/style.css}">
     <title>Nuevo Producto</title>
-
 </head>
-
-<h1>Cargar nuevo producto:</h1>
-<body>
- <form th:action="@{/guardar}" method="post" th:object="${producto}">
-    <!--<input type="hidden" name="idProducto" th:field="*{idProducto}"/>-->
-    <br/>
-    <label for="codigoEan">Ean:</label>
-    <input type="text" name="codigoEan" id="codigoEan" th:field="*{codigoEan}">
-     <label for="nombre">Nombre:</label>
-      <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
-      <label for="descripcion">Descripción:</label>
-      <input type="text" name="descripcion" id="descripcion" th:field="*{descripcion}">
-      <label for="precio">Precio</label>
-      <input type="text" name="precio" id="precio" th:field="*{precio}">
-      <label for="stock">Stock</label>
-      <input type="text" name="stock" id="stock" th:field="*{stock}">
-
-    <input type="submit" name="guardar" value="Guardar"/>
-     <a th:href="@{/volver}" th:text="Volver"/>
-
-</form>
-
-</body>
+    <body>
+        <div class="container-fluid py-5 mt-5">
+            <div class="row justify-content-md-center">
+                <div class="col-md-6">
+                    <h1>Cargar nuevo producto:</h1>
+                    <form th:action="@{/guardar}" method="post" th:object="${producto}">
+                        <div class="mb-1">
+                            <label for="codigoEan" class="form-label">Ean:</label>
+                            <input type="number" name="codigoEan" id="codigoEan" th:field="*{codigoEan}" class="form-control" placeholder="código ean">
+                        </div>
+                        <div class="mb-1">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" th:field="*{nombre}" ></textarea>
+                        </div>
+                        <div class="mb-1">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea class="form-control" name="descripcion" id="descripcion" th:field="*{descripcion}" ></textarea>
+                        </div>
+                        <div class="mb-1">
+                            <label for="precio" class="form-label">Precio:</label>
+                            <input type="text" class="form-control" name="precio" id="precio" th:field="*{precio}" ></textarea>
+                        </div>
+                        <div class="mb-1">
+                            <label for="stock" class="form-label">Stock:</label>
+                            <input type="number" class="form-control" name="stock" id="stock" th:field="*{stock}"></textarea>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <input type="submit" name="guardar" value="Guardar" class="btn btn-outline-danger me-md-2" />
+                            <a th:href="@{/volver}" th:text="Volver" class="btn btn-outline-danger me-md-2"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
