@@ -1,23 +1,22 @@
 package com.eval.ejercicio1.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
 @Entity
+@Table(name="servicios")
 public class Servicio implements Serializable {
     private static final long serialVersionUID=1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int codigoServicio;
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int idServicio;
+    private int codigoEan;
     private String nombre;
     private String descripcion;
     private float precio;
-    private String duracion;
+    private float duracion;
 }
