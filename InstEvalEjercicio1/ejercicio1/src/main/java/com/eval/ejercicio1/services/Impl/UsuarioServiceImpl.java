@@ -13,7 +13,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Autowired
     IUsuarioRepository usuarioRepository;
     public boolean validarLogueo(UsuarioDto usuario){
-        UsuarioDto existeUsuario = usuarioRepository.findUsuario(usuario.getNombreUsuario(), usuario.getPassword());
+        Usuario existeUsuario = usuarioRepository.findUsuario(usuario.getNombreUsuario(), usuario.getPasswordUsuario());
 
         if(existeUsuario != null){
             return true;

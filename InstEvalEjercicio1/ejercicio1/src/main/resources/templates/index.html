@@ -7,59 +7,18 @@
 
 </head>
 <body>
-    <h1 th:text="${tituloProd}">Productos</h1>
+<form th:action="@{/login}" method="post" th:object="${usuarioDto}">
+    <!--<input type="hidden" name="idProducto" th:field="*{idProducto}"/>-->
+    <br/>
+    <label for="nombreUsuario">Nombre de usuario:</label>
+    <input type="text" name="nombreUsuario" id="nombreUsuario" th:field="*{nombreUsuario}">
+    <label for="passwordUsuario">Contraseña:</label>
+    <input type="text" name="passwordUsuario" id="passwordUsuario" th:field="*{passwordUsuario}">
 
 
-    <div th:if="${listaProductos != null and !listaProductos.empty}">
-        <table>
-             <tr>
-                 <th>Cód. producto</th>
-                 <th>EAN</th>
-                 <th>Nombre</th>
-                 <th>Descripción</th>
-                 <th>Precio</th>
-                 <th>Stock</th>
-             </tr>
-             <tr th:each="producto: ${listaProductos}">
-                 <td th:text="${producto.idProducto}"></td>
-                 <td th:text="${producto.codigoEan}"></td>
-                 <td th:text="${producto.nombre}"></td>
-                 <td th:text="${producto.descripcion}"></td>
-                 <td>$<span th:text="${producto.precio}"/></td>
-                 <td th:text="${producto.stock}"></td>
-           </tr>
-        </table>
-    </div>
-    <div th:unless="${listaProductos != null and !listaProductos.empty}">
-        <p>No hay productos disponibles.</p>
-    </div>
-    <a th:href="@{/nuevoproducto}" th:text="Nuevo"/>
+    <input type="submit" name="guardar" value="Guardar"/>
 
-    <h1 th:text="${tituloServ}">Servicios</h1>
-    <div th:if="${listaServicios != null and !listaServicios.empty}">
-        <table>
-            <tr>
-                <th>Cód. Servicio</th>
-                <th>EAN</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Duración</th>
-            </tr>
-            <tr th:each="servicio: ${listaServicios}">
-                <td th:text="${servicio.idProducto}"></td>
-                <td th:text="${servicio.codigoEan}"></td>
-                <td th:text="${servicio.nombre}"></td>
-                <td th:text="${servicio.descripcion}"></td>
-                <td>$<span th:text="${servicio.precio}"/></td>
-                <td th:text="${servicio.duracion}"></td>
 
-            </tr>
-        </table>
-    </div>
-    <div th:unless="${listaServicios != null and !listaServicios.empty}">
-        <p>No hay productos disponibles.</p>
-    </div>
-    <a th:href="@{/nuevoservicio}" th:text="Nuevo"/>
+</form>
 </body>
 </html>

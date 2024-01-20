@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <title>Nuevo Servicio</title>
+
+</head>
+<body>
+<form th:action="@{/guardarservicio}" method="post" th:object="${servicio}">
+  <!--<input type="hidden" name="idProducto" th:field="*{idProducto}"/>-->
+  <br/>
+  <label for="codigoEan">Ean:</label>
+  <input type="text" name="codigoEan" id="codigoEan" th:field="*{codigoEan}">
+  <label for="nombre">Nombre:</label>
+  <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
+  <label for="descripcion">Descripción:</label>
+  <input type="text" name="descripcion" id="descripcion" th:field="*{descripcion}">
+  <label for="precio">Precio</label>
+  <input type="text" name="precio" id="precio" th:field="*{precio}">
+  <label for="duracion">Stock</label>
+  <input type="text" name="duracion" id="duracion" th:field="*{duracion}">
+
+  <input type="submit" name="guardar" value="Guardar"/>
+
+
+</form>
+</body>
+</html>

@@ -22,5 +22,11 @@ public class ProductoServiceImpl implements IProductoService {
         return productoRepository.save(producto);
     }
 
+    @Override
+    public void borrarProductoPorId(String idProducto) {
+        int idProd = Integer.parseInt(idProducto);
+        productoRepository.deleteById(idProd);
+    }
+
 
 }

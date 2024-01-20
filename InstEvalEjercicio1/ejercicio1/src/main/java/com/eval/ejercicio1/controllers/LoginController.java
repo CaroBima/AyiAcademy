@@ -1,6 +1,7 @@
 package com.eval.ejercicio1.controllers;
 
 import com.eval.ejercicio1.Dto.UsuarioDto;
+import com.eval.ejercicio1.entities.Producto;
 import com.eval.ejercicio1.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,16 +16,29 @@ public class LoginController {
     @Autowired
     IUsuarioService usuarioService;
 
-    @PostMapping("/login")
-    public String mostrarLogueo(@RequestParam UsuarioDto usuario, Model model) {
 
-        boolean existeUsuario = usuarioService.validarLogueo(usuario);
+    @GetMapping("/")
+    public String mostrarLogueo(Model model){
+        model.addAttribute("usuarioDto", new UsuarioDto());
 
-        if (!existeUsuario) {
-            return "login";
-        }
 
         return "index";
+    }
+
+
+    @PostMapping("/login")
+    public String mostrarLogueo(UsuarioDto usuarioDto, Model model) {
+        //model.addAttribute("usuarioDto", new UsuarioDto());
+
+        boolean existeUsuario = usuarioService.validarLogueo(usuarioDto);
+
+        if (!existeUsuario) {
+            model.addAttribute("usuarioDto", new UsuarioDto());
+            return "redirect:/";
+        }else{
+            return "redirect:/listados";}
+
+
     }
 
 }

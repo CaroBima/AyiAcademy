@@ -5,4 +5,7 @@ import java.util.List;
 
 public interface IServicioService {
     List<Servicio> obtenerServicios();
+    Servicio guardarServicio(Servicio servicio);
+
+    void borrarServicioPorId(String idServicio);
 }

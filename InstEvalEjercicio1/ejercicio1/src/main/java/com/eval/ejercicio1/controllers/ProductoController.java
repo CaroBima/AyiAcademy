@@ -5,9 +5,7 @@ import com.eval.ejercicio1.services.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProductoController {
@@ -22,10 +20,16 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
-    public String guardarProducto(Producto producto, Model model){
+    public String guardarProducto(Producto producto){
         productoService.guardarProducto(producto);
 
         //model.addAttribute("producto", producto);
-        return "redirect:/";
+        return "redirect:/listados";
+    }
+
+    @GetMapping("/borrarproducto/{idProducto}")
+    public String borrarProducto(@PathVariable String idProducto){
+        productoService.borrarProductoPorId(idProducto);
+        return "redirect:/listados";
     }
 }

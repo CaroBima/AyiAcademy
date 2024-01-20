@@ -28,7 +28,7 @@ public class PrincipalController {
     @Value("${tituloServ}")
     String tituloServ;
 
-    @GetMapping("/")
+    @GetMapping("/listados")
     public String cargarInformacion (Model model){
         List<Producto> listaProductos = productoService.obtenerProductos();
         List<Servicio> listaServicios = servicioService.obtenerServicios();
@@ -38,7 +38,7 @@ public class PrincipalController {
         model.addAttribute("listaProductos", listaProductos);
         model.addAttribute("listaServicios", listaServicios);
 
-        return "index";
+        return "listados";
     }
 
 }

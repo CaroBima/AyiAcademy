@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
-    @Query(value = "Select * from usuario where nombreUsuario = :nombreUsuario and password = :contrasenia", nativeQuery = true )
-    UsuarioDto findUsuario(@Param("nombreUsuario") String nombreUsuario, @Param("contrasenia") String contrasenia);
+    @Query(value = "Select * from usuarios where nombre = :nombreUsuario and password_usuario = :contrasenia", nativeQuery = true )
+    Usuario findUsuario(@Param("nombreUsuario") String nombreUsuario, @Param("contrasenia") String contrasenia);
 }
