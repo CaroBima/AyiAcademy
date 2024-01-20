@@ -19,7 +19,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String mostrarLogueo(Model model){
-        model.addAttribute("usuarioDto", new UsuarioDto());
+        model.addAttribute("usuario", new UsuarioDto());
 
 
         return "index";

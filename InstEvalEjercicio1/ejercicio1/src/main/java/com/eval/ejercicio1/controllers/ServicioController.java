@@ -25,9 +25,7 @@ public class ServicioController {
 
     @PostMapping("/guardarservicio")
     public String guardarServicio(Servicio servicio){
-
         servicioService.guardarServicio(servicio);
-        //model.addAttribute("producto", producto);
         return "redirect:/listados";
     }
 
