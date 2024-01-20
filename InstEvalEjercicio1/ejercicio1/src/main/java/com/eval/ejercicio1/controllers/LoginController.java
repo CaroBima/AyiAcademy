@@ -1,10 +1,13 @@
 package com.eval.ejercicio1.controllers;
 
+import com.eval.ejercicio1.Dto.UsuarioDto;
 import com.eval.ejercicio1.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
@@ -12,24 +15,16 @@ public class LoginController {
     @Autowired
     IUsuarioService usuarioService;
 
-    @GetMapping("/login")
-    public String mostrarLogueo(Model model) {
+    @PostMapping("/login")
+    public String mostrarLogueo(@RequestParam UsuarioDto usuario, Model model) {
 
-        boolean existeUsuario = usuarioService.validarLogueo(nombreUsuario, contrasenia)
+        boolean existeUsuario = usuarioService.validarLogueo(usuario);
 
-        if () {
+        if (!existeUsuario) {
             return "login";
         }
 
-        return "redirect:/";
+        return "index";
     }
 
-    @GetMapping("/logout")
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/";
-    }
 }

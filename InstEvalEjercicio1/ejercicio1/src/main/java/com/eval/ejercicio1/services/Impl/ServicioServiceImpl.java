@@ -1,8 +1,19 @@
 package com.eval.ejercicio1.services.Impl;
 
+import com.eval.ejercicio1.entities.Servicio;
+import com.eval.ejercicio1.repository.IServicioRepository;
 import com.eval.ejercicio1.services.IServicioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ServicioServiceImpl implements IServicioService {
+    @Autowired
+    IServicioRepository servicioRepository;
+    @Override
+    public List<Servicio> obtenerServicios() {
+        return servicioRepository.findAll();
+    }
 }

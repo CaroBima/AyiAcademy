@@ -7,6 +7,33 @@
 
 </head>
 <body>
+    <h1 th:text="${tituloProductos}">Titulo</h1>
+
+
+    <!--  <div th:if="${listaProductos !null and !listaProductos.empty}">
+        <table>
+             <tr>
+                 <th>Nro de patente</th>
+                 <th>Titular</th>
+                 <th>Marca</th>
+                 <th>Modelo</th>
+                 <th>Kilometraje</th>
+             </tr>
+             <tr th:each="producto: ${listaProductos}">
+                 <td th:text="${producto.codigoProducto}"></td>
+                 <td th:text="${producto.codigoEan}"></td>
+                 <td th:text="${producto.nombre}"></td>
+                 <td th:text="${producto.descripcion}"></td>
+                 <td th:text="${producto.precio}"></td>
+                 <td th:text="${producto.duracion}"></td>-->
+                <!--<td> <a th:href="@{/editar/} + ${auto.idAuto}" th:text="Editar"/></td>-->
+          <!--  </tr>
+        </table>
+    </div>
+    <div th:unless="${listaProductos != null and !listaProductos.empty}">
+        <p>No hay productos disponibles.</p>
+    </div>-->
+    <h1 th:text="${tituloServicios}">Productos</h1>
 
 </body>
 </html>
