@@ -23,10 +23,13 @@
                             <span class="input-group-text" id="passwordLabel">Contraseña: </span>
                             <input type="text" name="passwordUsuario" id="passwordUsuario" th:field="*{passwordUsuario}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
-
+                        <div th:if="${error}" class="error">
+                            <p th:text="${error}" />
+                        </div>
                         <div class="d-grid gap-2 col-6 mx-auto ">
                             <button type="submit" class="btn btn-secondary" name="guardar" value="Guardar">Ingresar</button>
                         </div>
+
                     </form>
                 </div>
             </div>

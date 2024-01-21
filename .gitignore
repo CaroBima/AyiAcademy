@@ -6,6 +6,7 @@ target/
 *.deb
 /out
 /production
+/capturas*
 
 ### STS ###
 .apt_generated

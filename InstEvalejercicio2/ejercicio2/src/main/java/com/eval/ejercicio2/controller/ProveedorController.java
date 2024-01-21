@@ -48,7 +48,7 @@ public class ProveedorController {
     @GetMapping("/actualizarprov/{idProveedor}")
     public String actualizarProveedor(@PathVariable String idProveedor, Model model){
         Proveedor provViejo = proveedorService.buscarPorId(idProveedor);
-        model.addAttribute("proveedor", new Proveedor());
+
         model.addAttribute("provViejo", provViejo);
 
         return "editarproveedor";
@@ -56,7 +56,7 @@ public class ProveedorController {
 
     @PostMapping("/actualizar")
     public String actualizarProducto(Proveedor proveedor){
-        System.out.println("entra al endpoint de  actualizar " + proveedor.getIdProveedor());
+
         proveedorService.actualizarProveedor(proveedor);
 
         return "redirect:/listadoprov";

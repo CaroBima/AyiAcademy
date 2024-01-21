@@ -46,7 +46,6 @@ public class ProveedorService implements IProveedorService {
     @Override
     @Transactional
     public void actualizarProveedor(Proveedor proveedor) {
-        System.out.println(proveedor.getIdProveedor());
         proveedorRepository.updateProveedor(proveedor.getNombre(), proveedor.getTelefono(), proveedor.getDireccion(), proveedor.getEmail(), proveedor.getSitioWeb(), proveedor.getEstado(),proveedor.getIdProveedor());
     }
 

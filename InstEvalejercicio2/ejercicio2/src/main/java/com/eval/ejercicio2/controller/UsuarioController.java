@@ -27,9 +27,11 @@ public class UsuarioController {
 
         boolean existeUsuario = usuarioService.validarLogueo(usuario);
 
+
         if (!existeUsuario) {
+            model.addAttribute("error", "Credenciales inválidas. Por favor, inténtelo de nuevo.");
             model.addAttribute("usuario", new Usuario());
-            return "redirect:/";
+            return "index";
         }else{
             return "redirect:/listadoprov";}
 
