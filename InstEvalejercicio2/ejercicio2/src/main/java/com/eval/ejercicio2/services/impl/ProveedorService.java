@@ -5,6 +5,7 @@ import com.eval.ejercicio2.repository.IProveedorRepository;
 import com.eval.ejercicio2.services.IProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,6 +41,13 @@ public class ProveedorService implements IProveedorService {
     public Proveedor buscarPorId(String idProveedor) {
         int idProv = Integer.parseInt(idProveedor);
         return proveedorRepository.findById(idProv).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void actualizarProveedor(Proveedor proveedor) {
+        System.out.println(proveedor.getIdProveedor());
+        proveedorRepository.updateProveedor(proveedor.getNombre(), proveedor.getTelefono(), proveedor.getDireccion(), proveedor.getEmail(), proveedor.getSitioWeb(), proveedor.getEstado(),proveedor.getIdProveedor());
     }
 
 

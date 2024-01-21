@@ -10,6 +10,7 @@ public interface IProveedorService {
     void editarProveedor(Proveedor proveedorEditado);
     void guardarProveedor(Proveedor nuevoProveedor);
     Proveedor buscarPorId(String idProv);
+    void actualizarProveedor(Proveedor proveedor);
 
 
 }
