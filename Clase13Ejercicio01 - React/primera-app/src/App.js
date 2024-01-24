@@ -1,15 +1,19 @@
-import logo from './logo.svg';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <img src="/Training-spring-boot.png" className="App-logo" alt="logo spring boot" />
-       <h1>Curso de Java, Spring Boot y React.</h1>
-      </header>
+      <h1>Login</h1>
+      <form>
+        <label for="nombreUsuario">Usuario: </label>
+        <input type="text" id="nombreUsuario" name="nombreUsuario"/>
+        <br/>
+        <label for="passUsuario">Contraseña: </label>
+        <input type="password" id="passUsuario" name="passUsuario"/>
+        <br/>
+        <input type="submit" value="Ingresar"/>
+      </form>
     </div>
   );
 }
