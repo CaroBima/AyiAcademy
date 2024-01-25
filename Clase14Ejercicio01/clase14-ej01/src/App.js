@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -12,6 +11,7 @@ function App() {
       <body>
         <Contenido/>
       </body>
+        <PieDePagina/>
     </div>
   );
 }
@@ -30,4 +30,19 @@ function Contenido(){
     </div>
   );
 }
+
+function PieDePagina(){
+  return(
+    <footer>
+      <div className="pie">
+          <p>Autor: Caro Bima -</p>
+      </div>
+    </footer>
+  )
+}
+/*
+function getYear() {
+  return new Date().getFullYear();
+}*/
+
 export default App;
