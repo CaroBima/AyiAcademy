@@ -35,14 +35,14 @@ function PieDePagina(){
   return(
     <footer>
       <div className="pie">
-          <p>Autor: Caro Bima -</p>
+          <p>Caro Bima - {getYear()}</p>
       </div>
     </footer>
   )
 }
-/*
+
 function getYear() {
   return new Date().getFullYear();
-}*/
+}
 
 export default App;
