@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.min.js";
-import {createRef} from "react";
 import {useState} from 'react';
 import './App.css';
 
@@ -28,9 +27,6 @@ function Login(){
     if (usuarioEncontrado) {
       setInicioSesionExitoso(true);
     } else {
-
-      console.log(Username)
-      console.log(contrasenia)
       alert('Usuario o contraseña incorrectos');
     }
   };
@@ -38,7 +34,7 @@ function Login(){
  return (
     <div className="container-fluid py-5 mt-5">
       {inicioSesionExitoso ? (
-        <LogueoExitoso/>
+        <LogueoExitoso nombre={Username}/>
       ) : (
         <div className="row justify-content-md-center">
           <div className="col-md-6 text-center">
@@ -81,17 +77,17 @@ function Login(){
   );
 }
 
-function LogueoExitoso(){
+function LogueoExitoso(usuario){
   return(
     <div>
-      <p>Bienvenido, has iniciado sesión con éxito.</p>
+      <p>Bienvenido {usuario.nombre}, has iniciado sesión con éxito.</p>
     </div>
   );
 }
 
 const datosUsuarioJson=[
   {
-  nomUsuario: "usuario",
+  nomUsuario: "caro",
   contrasenia: "1234"
   }
 ];
