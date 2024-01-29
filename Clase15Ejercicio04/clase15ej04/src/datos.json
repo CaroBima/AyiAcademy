@@ -1,0 +1,29 @@
+{
+    "personas": [
+      {
+        "id": 1,
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "dni": "12345678",
+        "direccion": "Calle 123",
+        "telefono": "3511234567"
+      },
+      {
+        "id": 2,
+        "nombre": "María",
+        "apellido": "Gómez",
+        "dni": "23456789",
+        "direccion": "Avenida 456",
+        "telefono": "3512345678"
+      },
+      {
+        "id": 3,
+        "nombre": "Carlos",
+        "apellido": "Rodríguez",
+        "dni": "34567890",
+        "direccion": "Plaza 789",
+        "telefono": "3513456789"
+      }
+
+    ]
+  }

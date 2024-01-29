@@ -10,7 +10,7 @@ componente y muestre datos de personas, los datos se deben extraer de un json
 function App() {
   return (
     <div className="App">
-      
+      <h1>Ejercicio 04</h1>
     </div>
   );
 }
