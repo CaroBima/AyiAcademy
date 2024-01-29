@@ -70,7 +70,8 @@ function App() {
 function BtnCambioColor({mostrarSaludo, cambiarColor}) {
 
   const cambiarColorBienvenida=()=>{
-    cambiarColor.current.style.color='red';
+    if(cambiarColor.current.style.color==='red')  cambiarColor.current.style.color='blue';
+    else  cambiarColor.current.style.color='red'
   }
 
   if (mostrarSaludo) {
