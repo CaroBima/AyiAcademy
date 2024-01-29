@@ -17,14 +17,18 @@ El nuevo componente debe tener un boton que al presionarlo, cambiara de color el
 function App() {
   const [nombre, setNombre] = useState('');
   const [mostrarSaludo, setMostrarSaludo] = useState(false);
+  const cambiarColor = createRef();
+  
+  
+  const cambiarColorBienvenida=()=>{
+    cambiarColor.current.style.color='red';
+  }
 
   const abrirSaludo = () => {
     setMostrarSaludo(true);
+   
   };
 
-  const cerrarSaludo = () => {
-    setMostrarSaludo(false);
-  };
 
   const handleInputChange = (event) => {
     setNombre(event.target.value);
@@ -56,14 +60,25 @@ function App() {
       </div>
 
       <div>
-
-        {mostrarSaludo && (
-          <MostrarSaludoComponent nombre={nombre} onClose={cerrarSaludo} />
-        )}
+        <h1 ref={cambiarColor} >{mostrarSaludo && (<MostrarSaludoComponent nombre={nombre} />)}</h1>
+        <BtnCambioColor mostrarSaludo = {mostrarSaludo} cambiarColor={cambiarColor} />
       </div>
     </div>
   );
 }
+
+function BtnCambioColor({mostrarSaludo, cambiarColor}) {
+
+  const cambiarColorBienvenida=()=>{
+    cambiarColor.current.style.color='red';
+  }
+
+  if (mostrarSaludo) {
+    return <button className="btn btn-outline-success btn-lg col-md-3" type="submit" onClick={cambiarColorBienvenida}>Cambiar Color</button>
+  }
+ 
+}
+
 
 
 export default App;
