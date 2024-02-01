@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.min.js";
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './App.css';
+import ListarEmpleados from './components/listausuarios';
 
 
 function App() {
@@ -14,27 +15,53 @@ function App() {
 
 
 function Login(){
-  const [Username, setUsuario] = useState('');
-  const [contrasenia, setContrasenia] = useState('');
+  const [nombreUsuario, setUsuario] = useState('');
+  const [passwordUsuario, setContrasenia] = useState('');
   const [inicioSesionExitoso, setInicioSesionExitoso] = useState(false);
+  const [data, setData] = useState({});
+   
+    const logueo = async () => {
+      try {
+        const response = await fetch('http://localhost:8081/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ nombreUsuario, passwordUsuario }),
+        });
 
-  const handleIngresar = () => {
-    const usuarioEncontrado = datosUsuarioJson.find(
-      (usuJson) =>
-      usuJson.nomUsuario === Username && usuJson.contrasenia === contrasenia
-    );
+        if(response.status === 200){
+          setData(response)
+          setInicioSesionExitoso(true);
+          
+        } else if (response.status ===409) {
+          setData(response)
+          setInicioSesionExitoso(false);
+          alert("Usuario o contraseña incorrectos");
+         
+        }
 
-    if (usuarioEncontrado) {
-      setInicioSesionExitoso(true);
-    } else {
-      alert('Usuario o contraseña incorrectos');
-    }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+ 
+  const handleUsuario = (event) => {
+    setUsuario(event.target.value);
+  };
+
+  const handleContrasenia = (event) => {
+    setContrasenia(event.target.value);
+  };
+
+  const handleLogin = () => {
+    logueo(); 
   };
 
  return (
     <div className="container-fluid py-5 mt-5">
       {inicioSesionExitoso ? (
-        <LogueoExitoso nombre={Username}/>
+        <LogueoExitoso nombre={nombreUsuario}/>
       ) : (
         <div className="row justify-content-md-center">
           <div className="col-md-6 text-center">
@@ -47,8 +74,8 @@ function Login(){
                 className="form-control"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                value={Username}
-                onChange={(e) => setUsuario(e.target.value)}
+                value={nombreUsuario}
+                onChange={handleUsuario}
               />
             </div>
 
@@ -61,14 +88,15 @@ function Login(){
                 className="form-control"
                 aria-label="contrasenia"
                 aria-describedby="basic-addon1"
-                value={contrasenia}
-                onChange={(e) => setContrasenia(e.target.value)}
+                value={passwordUsuario}
+                onChange={handleContrasenia}
               />
             </div>
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button type="submit"  className="btn btn-success" name="guardar" value="Guardar" onClick={handleIngresar}>
+              <button type="submit"  className="btn btn-success" name="guardar" value="Guardar" onClick={handleLogin}>
                 Ingresar
               </button>
+              
             </div>
           </div>
         </div>
@@ -80,19 +108,9 @@ function Login(){
 function LogueoExitoso(usuario){
   return(
     <div>
-      <p>Bienvenido {usuario.nombre}, has iniciado sesión con éxito.</p>
+      <ListarEmpleados titulo="Listado de empleados"/>
     </div>
   );
 }
-
-const datosUsuarioJson=[
-  {
-  nomUsuario: "caro",
-  contrasenia: "1234"
-  }
-];
-
-
-
 
 export default App;
