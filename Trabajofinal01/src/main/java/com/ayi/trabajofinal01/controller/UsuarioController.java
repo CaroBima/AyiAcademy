@@ -29,7 +29,7 @@ public class UsuarioController{
         boolean existeUsuario = usuarioService.validarLogueo(usuario);
 
         if (existeUsuario) {
-            return ResponseEntity.status(HttpStatus.OK)
+            return ResponseEntity.status(HttpStatus.OK) 
                     .body(usuario);
         }else{
             return ResponseEntity.status(HttpStatus.CONFLICT)

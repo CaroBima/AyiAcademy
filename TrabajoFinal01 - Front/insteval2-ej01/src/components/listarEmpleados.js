@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link} from 'react-router-dom';
+
 
 function ListarEmpleados(props) {
   const [data, setData] = useState([]);
@@ -10,31 +12,31 @@ function ListarEmpleados(props) {
         const data = await response.json();
 
         setData(data);
-        console.log(response);
-        console.log(data);
       } catch (error) {
         console.error("Error:", error);
       }
     };
     listarEmpleados().catch(null);
   }, []);
+
+ 
   return (
     <div>
-      <h1>{props.titulo}</h1>
-      <br />
-      <br />
-      <br />
+      <h1 className="mb-5">{props.titulo}</h1>
+    
 
       {!data.length && <p>No existen resultados</p>}
-      <table class="table">
+      <table className="table">
         <thead>
-          <tr class="table-primary">
+          <tr className="table-primary">
             <th>Legajo</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Cargo </th>
             <th>Sucursal</th>
             <th>Antigüedad</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -46,11 +48,21 @@ function ListarEmpleados(props) {
               <td>{value.cargo}</td>
               <td>{value.sucursal}</td>
               <td>{value.antiguedadAnios}</td>
+              <td><Link to="/editarempleado"  state={{datos: value}} >Editar</Link></td>
+              <td><Link to="/borrarempleado">Eliminar</Link></td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+   
   );
+
+  
 }
+
+
+
+
 export default ListarEmpleados;
+
