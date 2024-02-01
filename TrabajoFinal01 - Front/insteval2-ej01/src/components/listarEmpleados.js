@@ -48,7 +48,7 @@ function ListarEmpleados(props) {
               <td>{value.cargo}</td>
               <td>{value.sucursal}</td>
               <td>{value.antiguedadAnios}</td>
-              <td><Link to="/editarempleado"  state={{datos: value}} >Editar</Link></td>
+              <td><Link to="/editarempleado"  state={{empleado: value}}  >Editar</Link></td>
               <td><Link to="/borrarempleado">Eliminar</Link></td>
             </tr>
           ))}
