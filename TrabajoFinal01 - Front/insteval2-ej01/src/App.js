@@ -10,6 +10,7 @@ import Login from './components/login.js';
 
 
 import './App.css';
+import NuevoEmpleado from "./components/nuevoempleado.js";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/listarempleados" element={<ListarEmpleados/>} />
           <Route path="/editarempleado" element={<EditarEmpleado/>} />
           <Route path="/borrarempleado" element={<BorrarEmpleado/>} />
+          <Route path="/nuevoempleado" element={<NuevoEmpleado/>} />
         </Routes>
       
     </div>

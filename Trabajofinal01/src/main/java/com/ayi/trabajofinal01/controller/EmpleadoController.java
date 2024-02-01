@@ -27,6 +27,8 @@ public class EmpleadoController {
 
     @PutMapping("/editarempleado")
     public void editarEmpleado(@RequestBody Empleado empleado){
+        System.out.println("Entra al back de editar");
+        System.out.println(empleado.toString());
         empleadoService.editarEmpleado(empleado);
     }
 

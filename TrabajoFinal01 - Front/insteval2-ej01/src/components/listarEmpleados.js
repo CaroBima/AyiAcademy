@@ -21,39 +21,43 @@ function ListarEmpleados(props) {
 
  
   return (
-    <div>
-      <h1 className="mb-5">{props.titulo}</h1>
-    
-
-      {!data.length && <p>No existen resultados</p>}
-      <table className="table">
-        <thead>
-          <tr className="table-primary">
-            <th>Legajo</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Cargo </th>
-            <th>Sucursal</th>
-            <th>Antigüedad</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        {data.map((value, index) => (
-            <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-              <td>{value.legajo}</td>
-              <td>{value.nombreEmpleado}</td>
-              <td>{value.apellidoEmpleado}</td>
-              <td>{value.cargo}</td>
-              <td>{value.sucursal}</td>
-              <td>{value.antiguedadAnios}</td>
-              <td><Link to="/editarempleado"  state={{empleado: value}}  >Editar</Link></td>
-              <td><Link to="/borrarempleado">Eliminar</Link></td>
+    <div className="container-fluid py-5 mt-5">
+      <div className="row justify-content-md-center text-center">
+        <h1 className="mb-5">{props.titulo}</h1>
+      
+        {!data.length && <p className="alerta">No se encontraron empleados</p>}
+        <table className="table">
+          <thead>
+            <tr className="table-primary">
+              <th>Legajo</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Cargo </th>
+              <th>Sucursal</th>
+              <th>Antigüedad</th>
+              <th></th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          {data.map((value, index) => (
+              <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
+                <td>{value.legajo}</td>
+                <td>{value.nombreEmpleado}</td>
+                <td>{value.apellidoEmpleado}</td>
+                <td>{value.cargo}</td>
+                <td>{value.sucursal}</td>
+                <td>{value.antiguedadAnios}</td>
+                <td><Link to="/editarempleado"  state={{empleado: value}}  >Editar</Link></td>
+                <td><Link to="/borrarempleado">Eliminar</Link></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+          <Link to="/nuevoempleado" class="btn btn-outline-danger me-md-2">Nuevo Empleado</Link>
+        </div>
+      </div>
     </div>
    
   );
