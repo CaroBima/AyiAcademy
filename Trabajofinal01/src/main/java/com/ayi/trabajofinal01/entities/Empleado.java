@@ -17,7 +17,7 @@ public class Empleado implements Serializable {
     private static final long serialVersionUID=1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int legajo;
     private String nombreEmpleado;
     private String apellidoEmpleado;
