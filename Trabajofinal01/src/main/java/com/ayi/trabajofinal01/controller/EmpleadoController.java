@@ -29,5 +29,10 @@ public class EmpleadoController {
     public void editarEmpleado(@RequestBody Empleado empleado){
         empleadoService.editarEmpleado(empleado);
     }
+
+    @DeleteMapping("/borrarempleado/{idEmpleado}")
+    public void borrarEmpleado(@PathVariable String idEmpleado){
+        empleadoService.borrarEmpleado(idEmpleado);
+    }
 }
 

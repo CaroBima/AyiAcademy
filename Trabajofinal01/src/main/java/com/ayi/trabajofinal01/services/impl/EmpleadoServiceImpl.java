@@ -14,10 +14,12 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 
     @Autowired
     IEmpleadoRepository empleadoRepository;
+    @Override
     public List<Empleado> buscarListaEmpleados(){
         return empleadoRepository.findAll();
     }
 
+    @Override
     public void guardarNuevoEmpleado(Empleado empleado){
         empleadoRepository.save(empleado);
     }
@@ -25,8 +27,15 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     @Override
     @Transactional
     public void editarEmpleado(Empleado empleado) {
-        System.out.println(empleado.toString());
         empleadoRepository.updateEmpleado(empleado.getNombreEmpleado(), empleado.getApellidoEmpleado(), empleado.getCargo(), empleado.getSucursal(), empleado.getAntiguedadAnios(), empleado.getLegajo());
+
+    }
+
+    @Override
+    public void borrarEmpleado(String idEmpleado){
+        int id = Integer.parseInt(idEmpleado);
+        empleadoRepository.deleteById(id);
+
 
     }
 }

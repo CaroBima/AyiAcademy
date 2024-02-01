@@ -8,4 +8,5 @@ public interface IEmpleadoService {
     List<Empleado> buscarListaEmpleados();
     void guardarNuevoEmpleado(Empleado empleado);
     void editarEmpleado(Empleado empleado);
+    void borrarEmpleado(String idEmpleado);
 }
