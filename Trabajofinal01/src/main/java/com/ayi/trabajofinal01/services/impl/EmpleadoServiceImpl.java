@@ -5,6 +5,7 @@ import com.ayi.trabajofinal01.repository.IEmpleadoRepository;
 import com.ayi.trabajofinal01.services.IEmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,8 +23,10 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     }
 
     @Override
+    @Transactional
     public void editarEmpleado(Empleado empleado) {
-        
-        empleadoRepository.save(empleado);
+        System.out.println(empleado.toString());
+        empleadoRepository.updateEmpleado(empleado.getNombreEmpleado(), empleado.getApellidoEmpleado(), empleado.getCargo(), empleado.getSucursal(), empleado.getAntiguedadAnios(), empleado.getLegajo());
+
     }
 }
