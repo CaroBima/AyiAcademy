@@ -58,7 +58,8 @@ function NuevoEmpleado() {
   const handleGuardado = (event) =>{
     event.preventDefault();
     guardarEmpleado();
-    window.location='./listarempleados';
+   
+    window.location.replace('./listarempleados');
  }
   
   return (
@@ -66,7 +67,7 @@ function NuevoEmpleado() {
       <div className="container-fluid py-5 mt-5">
         <div className="row justify-content-md-center">
           <div className="col-md-6">
-            <h1>Editar empleado:</h1>
+            <h1 className="mb-5">Cargar nuevo empleado:</h1>
             <form name="formValid" method="post">
               <input type="hidden" name="legajo" defaultValue={legajo}  />
               <div className="mb-1">

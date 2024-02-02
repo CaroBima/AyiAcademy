@@ -76,7 +76,7 @@ function BorrarEmpleado(props) {
               onClick={handleBorrado}
             />
             <Link
-              to="/listarempleados"
+              to="/listarempleados" titulo="Listado de empleados"
               className="btn btn-outline-danger me-md-2"
             >
               Volver
