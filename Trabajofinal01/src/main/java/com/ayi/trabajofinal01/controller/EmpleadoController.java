@@ -22,13 +22,12 @@ public class EmpleadoController {
 
     @PostMapping("/nuevoempleado")
     public void guardarNuevoEmpleado(@RequestBody Empleado empleado){
-        empleadoService.guardarNuevoEmpleado(empleado);
+         empleadoService.guardarNuevoEmpleado(empleado);
+
     }
 
     @PutMapping("/editarempleado")
     public void editarEmpleado(@RequestBody Empleado empleado){
-        System.out.println("Entra al back de editar");
-        System.out.println(empleado.toString());
         empleadoService.editarEmpleado(empleado);
     }
 

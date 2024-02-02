@@ -49,13 +49,13 @@ function ListarEmpleados(props) {
                 <td>{value.sucursal}</td>
                 <td>{value.antiguedadAnios}</td>
                 <td><Link to="/editarempleado"  state={{empleado: value}}  >Editar</Link></td>
-                <td><Link to="/borrarempleado">Eliminar</Link></td>
+                <td><Link to="/borrarempleado" state={{empleado: value}} >Eliminar</Link></td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-          <Link to="/nuevoempleado" class="btn btn-outline-danger me-md-2">Nuevo Empleado</Link>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+          <Link to="/nuevoempleado" className="btn btn-outline-danger me-md-2">Nuevo Empleado</Link>
         </div>
       </div>
     </div>

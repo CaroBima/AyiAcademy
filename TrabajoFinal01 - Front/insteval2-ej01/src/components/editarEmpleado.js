@@ -2,21 +2,27 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 function EditarEmpleado() {
+
+  
   //toma los valores  del objeto que le pasamos por props (empleado)
-  const location = useLocation();
-  const { empleado } = location.state;
+  const location = useLocation() ?? {};
+  const { empleado } = location?.state;
 
   //para tomar los valores del form y pasarlos al back
-  const [legajo, setLegajo] = useState("");
-  const [nombreEmpleado, setNombreEmpleado] = useState("");
-  const [apellidoEmpleado, setApellidoEmpleado] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [sucursal, setSucursal] = useState("");
-  const [antiguedadAnios, setAntiguedadAnios] = useState("");
+  const [legajo, setLegajo] = useState(empleado.legajo);
+  const [nombreEmpleado, setNombreEmpleado] = useState(empleado.nombreEmpleado);
+  const [apellidoEmpleado, setApellidoEmpleado] = useState(empleado.apellidoEmpleado);
+  const [cargo, setCargo] = useState(empleado.cargo);
+  const [sucursal, setSucursal] = useState(empleado.sucursal);
+  const [antiguedadAnios, setAntiguedadAnios] = useState(empleado.antiguedadAnios);
+ 
 
+    
   const editEmple = async () => {
+    setLegajo(empleado.legajo);
     try {
-      const response = await fetch("http://localhost:8081/editarempleado", {
+      await fetch("http://localhost:8081/editarempleado", {
+        crossDomain: true,
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -27,13 +33,16 @@ function EditarEmpleado() {
           apellidoEmpleado,
           cargo,
           sucursal,
-          antiguedadAnios,
+          antiguedadAnios
         }),
       });
+      alert("Se ha actualizado el registro");
     } catch (error) {
       console.error("Error:", error);
     }
   };
+   
+
 
   const handleNombre = (event) => {
     setNombreEmpleado(event.target.value);
@@ -55,22 +64,11 @@ function EditarEmpleado() {
     setAntiguedadAnios(event.target.value);
   };
 
-  //ver aca, para guardar los valores que estan en el default en caso de que no se hayan editado
+  
   const handleGuardado = (event) =>{
-    console.log(empleado.legajo)
-    if(legajo===""){
-        console.log("entra al if")
-        setLegajo(empleado.legajo);
-    }
-   
-
-    if(nombreEmpleado===''){
-        setNombreEmpleado(event.target.defaultValue);
-    }
-
-   
+    event.preventDefault();
     editEmple();
-    <Link to="/listarempleados" className="btn btn-outline-danger me-md-2"/>
+    window.location='./listarempleados';
             
   }
 
@@ -81,10 +79,10 @@ function EditarEmpleado() {
           <div className="col-md-6">
             <h1>Editar empleado:</h1>
 
-            <form name="formValid" method="post">
-              <input type="hidden" name="idProveedor" />
+            <form name="formValid" method="put">
+              <input type="hidden" name="legajo" defaultValue={empleado.legajo} />
               <div className="mb-1">
-                <label for="nombre" className="form-label">
+                <label forHtml="nombre" className="form-label">
                   Nombre:
                 </label>
                 <input
@@ -155,7 +153,7 @@ function EditarEmpleado() {
               <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                 <input
                   type="submit"
-                  name="guardar"
+                  name="actualizar"
                   value="Actualizar"
                   className="btn btn-outline-danger me-md-2"
                   onClick={handleGuardado}
