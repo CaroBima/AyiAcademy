@@ -4,7 +4,9 @@ import com.ayi.trabajofinal2.model.Usuario;
 import com.ayi.trabajofinal2.repository.IUsuarioRepository;
 import com.ayi.trabajofinal2.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsuarioServiceImpl implements IUsuarioService {
     @Autowired
     IUsuarioRepository usuarioRepository;
