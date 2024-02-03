@@ -17,4 +17,19 @@ public class ClienteServiceImpl implements IClienteService {
     public List<Cliente> getListaClientes() {
         return clienteRepository.findAll();
     }
+
+    @Override
+    public void guardar(Cliente cliente) {
+        clienteRepository.save(cliente);
+    }
+
+    public void borrar(String idCliente){
+        int id = Integer.parseInt(idCliente);
+        clienteRepository.deleteById(id);
+    }
+
+    @Override
+    public void editar(Cliente cliente) {
+        clienteRepository.updateCliente(cliente.getNombre(), cliente.getApellido(), cliente.getFechaIngreso(), cliente.getDomicilio(), cliente.getTelefono(), cliente.getIdCliente());
+    }
 }
