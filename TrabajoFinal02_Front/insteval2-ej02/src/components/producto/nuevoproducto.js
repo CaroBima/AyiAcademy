@@ -13,6 +13,7 @@ function NuevoProducto() {
   const [marca, setMarca] = useState("");
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
+  const [mostrarDatosValidos, setMostrarDatosValidos] = useState(false);
 
   const guardarProducto = async () => {
     setIdProducto("");
@@ -69,9 +70,32 @@ function NuevoProducto() {
 
   const handleGuardado = (event) => {
     event.preventDefault();
+
+    const datosValidos =
+      codigoEan.length > 0 &&
+      codigoEan.length <= 25 &&
+      nombreProducto.length > 0 &&
+      nombreProducto.length <= 25 &&
+      descripcionProducto.length > 0 &&
+      descripcionProducto.length <= 100 &&
+      tipo.length > 0 &&
+      tipo.length <= 15 &&
+      marca.length > 0 &&
+      marca.length <= 20 &&
+      precio > 0 &&
+      precio <= 999.99 &&
+      stock >= 0;
+
+    if (datosValidos) {
     guardarProducto();
     alert("Producto guardado correctamente");
     window.location = "./listados";
+  } else {
+    alert(
+      "Todos los campos deben estar completos. Verificar además la longitud máxima especificada para cada campo."
+    );
+    setMostrarDatosValidos(true)
+  }
   };
 
   return (
@@ -82,6 +106,11 @@ function NuevoProducto() {
             <h1 className="mb-5 titulo">{titulo}</h1>
             <form name="formValid" method="post">
               <input type="hidden" name="legajo" value={idProducto} />
+              {mostrarDatosValidos && (<div>
+                                    <p>Caracteres máximos de cada campo:
+                                    <br></br>
+                                    Cod. Ean: 25, Nombre: 25, Descripción: 100, Tipo: 15, Marca: 20. El precio debe ser menor a 999.99</p>
+                                    </div>)}
               <div className="mb-1">
                 <label forhtml="codigoEan" className="form-label">
                   Codigo EAN:

@@ -11,6 +11,7 @@ function EditarCliente() {
   const [fechaIngreso, setFechaIngreso] = useState(cliente.fechaIngreso);
   const [domicilio, setDomicilio] = useState(cliente.domicilio);
   const [telefono, setTelefono] = useState(cliente.telefono);
+  const [validarDatos, setValidarDatos] = useState(true);
 
   const editCliente = async () => {
     setIdCliente(cliente.idCliente);
@@ -37,6 +38,7 @@ function EditarCliente() {
 
   const handleNombre = (event) => {
     setNombre(event.target.value);
+
   };
 
   const handleApellido = (event) => {
@@ -57,9 +59,25 @@ function EditarCliente() {
 
   const handleGuardado = (event) => {
     event.preventDefault();
-    editCliente();
-    alert("El cliente ha sido editado");
-    window.location = "./listados";
+
+    const datosValidos =
+    nombre.length > 0 &&
+    nombre.length <= 25 &&
+    apellido.length > 0 &&
+    apellido.length <= 25 &&
+    domicilio.length > 0 &&
+    domicilio.length <= 25 &&
+    telefono.length <= 15 &&
+    telefono.length >= 0;
+
+ 
+    if (datosValidos) {
+      editCliente();
+      alert("El cliente ha sido editado");
+      window.location = "./listados";
+    } else {
+      alert("Hay errores en los datos del formulario. Los campos deben estar completos y no tener más de 25 caracteres, salvo el telefono que soporta 15 como máximo");
+    }
   };
   return (
     <>
