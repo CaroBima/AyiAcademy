@@ -1,5 +1,10 @@
 import { Routes, Route } from "react-router-dom"
 
+//bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/js/bootstrap.min.js";
+
+//components
 import Login from "./components/login";
 import Listados from './components/listados'
 import NuevoCliente from './components/cliente/nuevocliente'
