@@ -30,14 +30,16 @@ public class ProductoController {
 
     @PutMapping("/editar")
     public ResponseEntity editarProducto(@RequestBody Producto producto){
-        productoService.editar(producto);
-        return new ResponseEntity(HttpStatus.OK);
+        boolean sePudoEditar = productoService.editar(producto);
+        return sePudoEditar ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/borrar/{idProducto}")
     public ResponseEntity borrarProducto(@PathVariable String idProducto){
-        productoService.borrar(idProducto);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+
+        boolean sePudoBorrar = productoService.borrar(idProducto);
+
+        return sePudoBorrar ? new ResponseEntity(HttpStatus.NO_CONTENT) : new ResponseEntity(HttpStatus.BAD_REQUEST);
 
     }
 }

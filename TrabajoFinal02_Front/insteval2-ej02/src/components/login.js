@@ -53,7 +53,8 @@ function Login(){
         ) : (
           <div className="row justify-content-md-center">
             <div className="col-md-6 text-center">
-              <div className="input-group mb-3">
+            <h1 className="titulo mb-5 mt-5 text-center">Bienvenido!</h1>
+              <div className="input-group mb-3 mt-5">
                 <span className="input-group-text" id="basic-addon1">
                   Usuario
                 </span>

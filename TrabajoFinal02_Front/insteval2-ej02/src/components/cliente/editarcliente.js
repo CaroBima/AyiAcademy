@@ -11,7 +11,7 @@ function EditarCliente() {
   const [fechaIngreso, setFechaIngreso] = useState(cliente.fechaIngreso);
   const [domicilio, setDomicilio] = useState(cliente.domicilio);
   const [telefono, setTelefono] = useState(cliente.telefono);
-  const [validarDatos, setValidarDatos] = useState(true);
+  
 
   const editCliente = async () => {
     setIdCliente(cliente.idCliente);

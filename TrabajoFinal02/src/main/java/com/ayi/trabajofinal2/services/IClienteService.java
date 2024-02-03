@@ -8,7 +8,7 @@ import java.util.List;
 public interface IClienteService {
     List<Cliente> getListaClientes();
 
-    void guardar(Cliente cliente);
-    void borrar(String idCliente);
-    void editar(Cliente cliente);
+    boolean guardar(Cliente cliente);
+    boolean borrar(String idCliente);
+    boolean editar(Cliente cliente);
 }

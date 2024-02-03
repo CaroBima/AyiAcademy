@@ -6,10 +6,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Configuración de Cross-Origin Resource Sharing (CORS) para permitir solicitudes
+ * desde un origen específico (http://localhost:3000/ en este caso).
+ *
+ */
 @Getter
 @Configuration
 public class CorsConfig {
 
+    /**
+     * Bean que configura las políticas CORS para permitir solicitudes desde
+     * http://localhost:4200 y especifica los métodos permitidos (GET, POST, PUT, DELETE).
+     *
+     * @return Instancia de {@link WebMvcConfigurer} con la configuración CORS.
+     */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

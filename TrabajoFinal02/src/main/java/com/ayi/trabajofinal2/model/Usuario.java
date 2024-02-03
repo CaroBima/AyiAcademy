@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entidad Usuario, utilizada para validar el acceso a la aplicacion
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

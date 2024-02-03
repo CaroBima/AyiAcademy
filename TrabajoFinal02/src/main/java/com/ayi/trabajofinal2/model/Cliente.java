@@ -8,6 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Representa una entidad de Cliente
+ * Contiene la información referida al cliente: su id, nombre, apellido, fecha de ingreso, domicilio y telefono de contacto
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

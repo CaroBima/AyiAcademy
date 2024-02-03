@@ -10,6 +10,6 @@ public interface IProductoService {
     List<Producto> getListaProductos();
 
     void guardar(ProductoDto productoDto);
-    void editar (Producto producto);
-    void borrar (String idProducto);
+    boolean editar (Producto producto);
+    boolean borrar (String idProducto);
 }
