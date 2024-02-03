@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IClienteRepository extends JpaRepository<Cliente, Integer> {
     @Modifying
-    @Query(value = "UPDATE clientes SET nombre = :nombre, apellido = :apellido, fecha_ingreso = :fechaIngreso, domicilio = :domicilio, telefono = :telefono WHERE id_cliente = :idClientes", nativeQuery = true)
+    @Query(value = "UPDATE clientes SET nombre = :nombre, apellido = :apellido, fecha_ingreso = :fechaIngreso, domicilio = :domicilio, telefono = :telefono WHERE id_cliente = :idCliente", nativeQuery = true)
     void updateCliente(
             @Param("nombre") String nombre,
             @Param("apellido") String apellido,

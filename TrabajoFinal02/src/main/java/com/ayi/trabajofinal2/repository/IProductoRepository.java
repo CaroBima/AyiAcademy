@@ -10,14 +10,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IProductoRepository extends JpaRepository<Producto,Integer> {
     @Modifying
-    @Query(value = "UPDATE productos SET codigo_ean = :codigoEan, nombre_producto = :nombreProducto, descripcion_producto = :descripcionProducto, tipo = :tipo, marca = :marca, decimal = :decimal, stock =:stock WHERE id_producto = :idProducto", nativeQuery = true)
+    @Query(value = "UPDATE productos SET codigo_ean = :codigoEan, nombre_producto = :nombreProducto, descripcion_producto = :descripcionProducto, tipo = :tipo, marca = :marca, precio = :precio, stock =:stock WHERE id_producto = :idProducto", nativeQuery = true)
     void updateProducto(
             @Param("codigoEan") String codigoEan,
             @Param("nombreProducto") String nombreProducto,
             @Param("descripcionProducto") String descripcionProducto,
             @Param("tipo") String tipo,
             @Param("marca") String marca,
-            @Param("decimal") float decimal,
+            @Param("precio") float precio,
             @Param("stock") int stock,
             @Param("idProducto") int idProducto
     );

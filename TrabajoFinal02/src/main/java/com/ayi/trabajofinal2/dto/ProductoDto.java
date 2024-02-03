@@ -1,8 +1,6 @@
-package com.ayi.trabajofinal2.model;
+package com.ayi.trabajofinal2.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,11 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-@Table(name = "productos")
-public class Producto {
-    @Id
-    private int idProducto;
+@AllArgsConstructor
+public class ProductoDto {
     private String codigoEan;
     private String nombreProducto;
     private String descripcionProducto;

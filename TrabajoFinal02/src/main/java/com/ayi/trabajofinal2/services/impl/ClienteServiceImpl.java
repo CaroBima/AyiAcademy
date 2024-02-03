@@ -5,6 +5,7 @@ import com.ayi.trabajofinal2.repository.IClienteRepository;
 import com.ayi.trabajofinal2.services.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
     @Override
+    @Transactional
     public void editar(Cliente cliente) {
         clienteRepository.updateCliente(cliente.getNombre(), cliente.getApellido(), cliente.getFechaIngreso(), cliente.getDomicilio(), cliente.getTelefono(), cliente.getIdCliente());
     }

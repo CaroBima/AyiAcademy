@@ -28,8 +28,8 @@ public class ClienteController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/borrar")
-    public ResponseEntity borrarCliente(@RequestParam String idCliente){
+    @DeleteMapping("/borrar/{idCliente}")
+    public ResponseEntity borrarCliente(@PathVariable String idCliente){
         clienteService.borrar(idCliente);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
