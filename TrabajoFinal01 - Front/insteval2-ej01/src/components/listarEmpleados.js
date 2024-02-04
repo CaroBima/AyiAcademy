@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link} from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 
 
 function ListarEmpleados(props) {
   const [data, setData] = useState([]);
+  const location = useLocation() ?? {};
+  const { titulo } = location?.state || '';
 
   useEffect(() => {
     const listarEmpleados = async () => {
@@ -23,7 +25,7 @@ function ListarEmpleados(props) {
   return (
     <div className="container-fluid py-5 mt-5">
       <div className="row justify-content-md-center text-center">
-        <h1 className="mb-5">{props.titulo}</h1>
+        {props.titulo  && props.titulo.length !=null ? <h1 className="mb-5 titulo">  {props.titulo}</h1> : <h1 className="mb-5 titulo">  {titulo}</h1>}
       
         {!data.length && <p className="alerta">No se encontraron empleados</p>}
         <table className="table">

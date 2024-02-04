@@ -40,7 +40,7 @@ function BorrarEmpleado(props) {
     <>
       <div className="container-fluid py-5 mt-5">
         <div className="row justify-content-md-center text-center">
-          <h1>Confirmar borrado:</h1>
+          <h1 className="titulo text-center">Confirmar borrado:</h1>
           <p className="alerta">
             Estás a punto de borrar al siguiente empleado:
           </p>
@@ -76,7 +76,7 @@ function BorrarEmpleado(props) {
               onClick={handleBorrado}
             />
             <Link
-              to="/listarempleados" titulo="Listado de empleados"
+              to="/listarempleados" state={{titulo: "Listado de empleados"}} 
               className="btn btn-outline-danger me-md-2"
             >
               Volver
