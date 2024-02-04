@@ -65,7 +65,7 @@ public class ClienteController {
 
     /**
      * Permite editar los datos de un usuario que se encuentra almacenado en la base de datos
-     * @Param String idCliente
+     * @Param Cliente
      * @return ResponseEntity Ok en el caso de que se haya podido editar, en caso de que no, devuelve Bad Request
      */
     @PutMapping("/editar")

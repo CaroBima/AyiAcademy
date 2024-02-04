@@ -51,12 +51,24 @@ public class ProductoController {
         return estaGuardado ? new ResponseEntity(HttpStatus.CREATED) : new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Permite editar los datos de un producto
+     * @Param Producto
+     * @return ResponseEntity Ok en el caso de que se haya podido editar, en caso de que no, devuelve Bad Request
+     */
     @PutMapping("/editar")
     public ResponseEntity editarProducto(@RequestBody Producto producto){
         boolean sePudoEditar = productoService.editar(producto);
         return sePudoEditar ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+
+    /**
+     * Permite borrar un producto cuyo id se recibe por parámetro
+     * @Param String idProducto
+     * @return ResponseEntity No Content en el caso de que el borrado se haya realizado. En el caso de que no se haya
+     * podido realizar, devuelve un Bad request
+     */
     @DeleteMapping("/borrar/{idProducto}")
     public ResponseEntity borrarProducto(@PathVariable String idProducto){
 

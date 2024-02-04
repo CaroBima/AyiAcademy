@@ -6,7 +6,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
+/**
+ * Repositorio JPA encargado de la persistencia y recuperación de datos relacionados con los productos.
+ * Este repositorio proporciona métodos para realizar operaciones sobre los datos de productos en la base de datos.
+ */
 @Repository
 public interface IProductoRepository extends JpaRepository<Producto,Integer> {
     @Modifying

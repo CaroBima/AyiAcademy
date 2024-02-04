@@ -10,16 +10,35 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Implementación de la interfaz {@link IClienteService}.
+ * ClienteServiceImpl es un servicio que proporciona métodos para obtener información sobre los clientes y
+ * gestionar la información sobre los mismos.
+ * @see IClienteService
+ * @see Cliente
+ */
 @Service
 public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
     IClienteRepository clienteRepository;
+
+    /**
+     * Permite realizar la busqueda de todos los usuarios que se encuentran almacenados en la base de datos
+     * @return Lista de clientes
+     */
     @Override
     public List<Cliente> getListaClientes() {
         return clienteRepository.findAll();
     }
 
+    /**
+     * Gestiona el guardado de un nuevo cliente en la base de datos. Recibe un cliente por parámetro, valida que los
+     * datos sean correctos y si lo son, realiza el guardado.
+     * @param cliente
+     * @return boolean - Devuelve true en caso de haberse realizado el guardado y false en caso de que no se haya realizado
+     * porque los valores recibidos por parámetro no son correctos
+     */
     @Override
     public boolean guardar(Cliente cliente) {
 
@@ -37,6 +56,11 @@ public class ClienteServiceImpl implements IClienteService {
 
     }
 
+    /**
+     * Permite realizar el borrado de un cliente, recibiendo el Id del cliente a borrar por parámetro
+     * @param idCliente
+     * @return boolean - Retorna true si fue borrado, en caso de no poder realizar el guardado devuelve false
+     */
     public boolean borrar(String idCliente){
 
         try {
@@ -49,6 +73,13 @@ public class ClienteServiceImpl implements IClienteService {
         }
     }
 
+    /**
+     * Permite la edición de un cliente. Recibe los datos del cliente a editar por parámetro, valida que dichos datos sean
+     * correctos y en caso de serlo, se realiza el guardado de los datos
+     * @param cliente
+     * @return boolean - Devuelve true en caso de que se haya realizado el guardado y false en caso de que alguno de los
+     * valores recibiodos no sea correcto.
+     */
     @Override
     @Transactional
     public boolean editar(Cliente cliente) {
