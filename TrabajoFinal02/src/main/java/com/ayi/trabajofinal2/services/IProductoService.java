@@ -9,7 +9,7 @@ import java.util.List;
 public interface IProductoService {
     List<Producto> getListaProductos();
 
-    void guardar(ProductoDto productoDto);
+    boolean guardar(ProductoDto productoDto);
     boolean editar (Producto producto);
     boolean borrar (String idProducto);
 }

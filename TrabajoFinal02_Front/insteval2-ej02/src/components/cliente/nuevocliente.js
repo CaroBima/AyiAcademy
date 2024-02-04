@@ -84,8 +84,8 @@ function NuevoCliente() {
     <>
       <div className="container-fluid py-5 mt-5">
         <div className="row justify-content-md-center">
-          <div className="col-md-6">
-            <h1 className="mb-5 titulo">{titulo}</h1>
+          <div className="col-md-6 ">
+            <h1 className="mb-5 titulo text-center">{titulo}</h1>
             <form name="formValid" method="post">
               <input type="hidden" name="legajo" defaultValue={idCliente} />
               <div className="mb-1">
@@ -166,7 +166,7 @@ function NuevoCliente() {
                   onClick={handleGuardado}
                 />
                 <Link
-                  to="/listarempleados"
+                  to="/listados"
                   className="btn btn-outline-danger me-md-2"
                 >
                   Volver

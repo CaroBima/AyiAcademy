@@ -21,7 +21,7 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public void guardar(ProductoDto productoDto) {
+    public boolean guardar(ProductoDto productoDto) {
         Producto producto = new Producto();
 
         producto.setCodigoEan(productoDto.getCodigoEan());
@@ -32,7 +32,19 @@ public class ProductoServiceImpl implements IProductoService {
         producto.setPrecio(productoDto.getPrecio());
         producto.setStock(productoDto.getStock());
 
-        productoRepository.save(producto);
+        if (producto !=null &&
+                producto.getCodigoEan().length()>0 && producto.getCodigoEan().length()<=25 &&
+                producto.getNombreProducto().length()>0 && producto.getNombreProducto().length()<=25 &&
+                producto.getDescripcionProducto().length()>0 && producto.getDescripcionProducto().length() <=100 &&
+                producto.getTipo().length() > 0 && producto.getTipo().length() <= 15 &&
+                producto.getMarca().length() > 0 && producto.getMarca().length() <= 20 &&
+                producto.getPrecio() >0 && producto.getPrecio() <= 999.99 &&
+                producto.getStock() >=0) {
+                    productoRepository.save(producto);
+            return true;
+        } else{
+            return false;
+        }
     }
 
     @Override

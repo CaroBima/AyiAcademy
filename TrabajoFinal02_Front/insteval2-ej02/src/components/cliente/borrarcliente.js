@@ -40,8 +40,8 @@ function BorrarCliente(){
         <>
        <div className="container-fluid py-5 mt-5">
         <div className="row justify-content-md-center text-center">
-          <h1 className="titulo">Confirmar borrado:</h1>
-          <p className="alerta">
+          <h1 className="titulo text-center">Confirmar borrado:</h1>
+          <p className="alerta text-center">
             Estás a punto de borrar al siguiente cliente:
           </p>
           <table className="table">

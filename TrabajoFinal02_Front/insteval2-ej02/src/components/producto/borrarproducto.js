@@ -40,8 +40,8 @@ function BorrarProducto(){
             <>
            <div className="container-fluid py-5 mt-5">
             <div className="row justify-content-md-center text-center">
-              <h1 className="titulo">{titulo}</h1>
-              <p className="alerta">
+              <h1 className="titulo text-center">{titulo}</h1>
+              <p className="alerta text-center">
                 Estás a punto de borrar al siguiente producto:
               </p>
               <table className="table">

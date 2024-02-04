@@ -106,7 +106,7 @@ function EditarProducto() {
       <div className="container-fluid py-5 mt-5">
         <div className="row justify-content-md-center">
           <div className="col-md-6">
-            <h1 className="mb-5 titulo">{titulo}</h1>
+            <h1 className="mb-5 titulo text-center">{titulo}</h1>
             
             {mostrarDatosValidos && (<div>
                                     <p>Caracteres máximos de cada campo:

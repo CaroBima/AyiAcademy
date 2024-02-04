@@ -67,14 +67,14 @@ function Listados(props){
                   <td>{value.marca}</td>
                   <td>{value.precio}</td>
                   <td>{value.stock}</td>
-                  <td><Link to="/editarproducto"  state={{producto: value, titulo: "Lista de Productos"}}  >Editar</Link></td>
+                  <td><Link to="/editarproducto"  state={{producto: value, titulo: "Editar Producto"}}  >Editar</Link></td>
                   <td><Link to="/borrarproducto" state={{producto: value, titulo: "Confirmar borrado:"}} >Eliminar</Link></td>
                 </tr>
               ))}
             </tbody>
           </table>
           <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-            <Link to="/nuevoproducto" state={{titulo: "Lista de Productos"}} className="btn btn-outline-danger me-md-2">Nuevo Producto</Link>
+            <Link to="/nuevoproducto" state={{titulo: "Nuevo Producto"}} className="btn btn-outline-danger me-md-2">Nuevo Producto</Link>
           </div>
 
           {/******************* Listado de Clientes *********************/}
